@@ -39,8 +39,8 @@ try {
     window.location.href ='404_error.php';
         </script>";
 }
-
-$sql = "SELECT *FROM enrollment WHERE password = '$password'";
+$md_pass = md5($password);
+$sql = "SELECT *FROM enrollment WHERE password = '$md_pass'";
 $result = mysqli_query($conn, $sql);
 $num = mysqli_num_rows($result);
 
@@ -54,6 +54,7 @@ $num = mysqli_num_rows($result);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link rel="icon" href="logo/qm.png" type="image/x-icon">
     <style>
         body {
             margin: 0;
@@ -68,7 +69,7 @@ $num = mysqli_num_rows($result);
             padding: 20px;
             background-color: #fff;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            height: 340px;
+            height: 375px;
         }
 
         .form-group {
@@ -137,7 +138,7 @@ $num = mysqli_num_rows($result);
                 if (!$num) {
                 ?>
                     <p style="color:red"> <?php echo "*Incorrect password!" ?></p>
-
+                    <p style="color: orange;">Know your password <a href="1_know_password.php">click here</a></p>
                 <?php } else {
                     $_SESSION['enrollment'] = $enrollment;
                     echo "<script>

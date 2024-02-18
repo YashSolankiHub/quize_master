@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login Page</title>
+
+<title>Know Your Password</title>
 <link rel="icon" href="logo/qm.png" type="image/x-icon">
 <style>
     body {
@@ -20,7 +21,7 @@
         padding: 20px;
         background-color: #fff;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        height: 342px;
+        height: 330px;
     }
 
     .form-group {
@@ -69,17 +70,17 @@
         <span><img src="logo/qm.png" alt="" style="height: 70px;"></span><h2 class="h">QuizMaster</h2>
     </div>
     
-    <h3 class="h">Login</h3>
-    <form action="login_page_validation.php" method="post">
+    <h3 class="h">Know Your Password</h3>
+    <form action="1_password_process.php" method="post">
         <div class="form-group">
             <input  type="number" id="enrollment" name="enrollment" placeholder="Enrollment number" min="2304070100001" max="2304070100187" required>
         </div>
         <div class="form-group">
 
-            <input style="margin-top: 5px;" type="password" id="password" name="password" placeholder="Password" required>
-            <p style="color: orange;">Know your password <a href="1_know_password.php">click here</a></p>
+            <input style="margin-top: 5px;" type="email" id="email" name="email" placeholder="Email" required>
+            <p><a href="login_page.php">Back to login page</a></p>
         </div>
-        <button type="submit" class="btn">Login</button>
+        <button type="submit" class="btn" name="send">Get Mail</button>
     </form>
 </div>
 </body>

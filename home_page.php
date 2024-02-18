@@ -57,6 +57,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="icon" href="logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
@@ -209,7 +210,7 @@
 
                     </ul>
                     <form class="d-flex" role="search">
-                        <h5 style="margin-right: 60px; margin-top:6px; color:white"><?php echo $student_name; ?></h5>
+                        <h6 style="margin-right: 60px; margin-top:6px; color:white"><?php echo $student_name; ?></h6>
                         <button type="button" class="btn btn-light" style="margin-right: 15px;">Profile</button>
                         <button type="button" class="btn btn-light" style="margin-right: 27px;" onclick="home()">Logout</button>
                     </form>
