@@ -16,7 +16,8 @@ if (!$conn) {
 
 
 
-function customErrorHandler($errno, $errstr, $errfile, $errline) {
+function customErrorHandler($errno, $errstr, $errfile, $errline)
+{
     // Check if the error level is among those you want to convert into exceptions
     if (error_reporting() === 0 || !in_array($errno, [E_WARNING, E_NOTICE])) {
         return;
@@ -39,6 +40,8 @@ try {
     window.location.href ='404_error.php';
         </script>";
 }
+
+
 $md_pass = md5($password);
 $sql = "SELECT *FROM enrollment WHERE password = '$md_pass'";
 $result = mysqli_query($conn, $sql);
@@ -116,6 +119,15 @@ $num = mysqli_num_rows($result);
         .logo_with_name {
             display: flex;
         }
+
+        .click_here_a {
+            color: rgb(0, 103, 184);
+            text-decoration: none;
+        }
+
+        .click_here_a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -138,7 +150,7 @@ $num = mysqli_num_rows($result);
                 if (!$num) {
                 ?>
                     <p style="color:red"> <?php echo "*Incorrect password!" ?></p>
-                    <p style="color: orange;">Know your password <a href="1_know_password.php">click here</a></p>
+                    <p style="color: orange;">Know your password <a href="1_know_password.php" class="click_here_a">click here</a></p>
                 <?php } else {
                     $_SESSION['enrollment'] = $enrollment;
                     echo "<script>

@@ -21,7 +21,7 @@
         padding: 20px;
         background-color: #fff;
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        height: 330px;
+        height: 310px;
     }
 
     .form-group {
@@ -62,6 +62,13 @@
     .logo_with_name{
         display: flex;
     }
+    .back_to_login_page_a{
+        color: rgb(0, 103, 184);
+        text-decoration: none;
+    }
+    .back_to_login_page_a:hover{
+        text-decoration: underline;
+    }
 </style>
 </head>
 <body background="img/Blur Bg.png">
@@ -76,9 +83,8 @@
             <input  type="number" id="enrollment" name="enrollment" placeholder="Enrollment number" min="2304070100001" max="2304070100187" required>
         </div>
         <div class="form-group">
-
-            <input style="margin-top: 5px;" type="email" id="email" name="email" placeholder="Email" required>
-            <p><a href="login_page.php">Back to login page</a></p>
+            <p style="font-size: 13px;">Password will be sent to your register mail</p>
+            <p><a href="login_page.php" class="back_to_login_page_a">Back to login page</a></p>
         </div>
         <button type="submit" class="btn" name="send">Get Mail</button>
     </form>

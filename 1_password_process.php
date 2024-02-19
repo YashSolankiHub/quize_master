@@ -14,7 +14,28 @@
     }
 
     $enrollment = $_POST['enrollment'];
-    $email = $_POST['email'];
+
+    $sql1= "select enrollment from generated_password where enrollment = '$enrollment' ";
+    $result1 = mysqli_query($conn, $sql1);
+    $num1 = mysqli_num_rows($result1);
+
+    if($num1)
+        {
+            echo "<script>
+            alert('Already sent mail! Please check your mail');
+            document.location.href= 'login_page.php';
+            </script>";
+        }
+    
+
+    $sql = "select mail_id from enrollment where enrollment = '$enrollment'";
+    $result = mysqli_query($conn, $sql);
+
+
+
+    $row = mysqli_fetch_assoc($result);
+
+    $email = $row['mail_id'];
 
 
     $characters = $email.$enrollment;
@@ -55,16 +76,16 @@
         $mail->SMTPSecure='ssl';
         $mail->Port = 465;
 
-        $mail->addAddress($_POST['email']);
+        $mail->addAddress("$email");
         $mail->isHTML(true);
-        $mail->Subject='Password For Quize Master';
+        $mail->Subject='QuizeMaster';
         $mail->Body = "Password : "."<b>$password</b>";
         $mail->send();
 
         
 
     }
-    
+    $hidden_mail = substr_replace($email, str_repeat('*',strpos($email, '@')-3),3, strpos($email, '@')-3);
 
 
 
@@ -73,6 +94,6 @@
 ?>
 
 <script>
-    alert("Password sent successfully. Check your mail");
+    alert("Password sent successfully to <?php echo $hidden_mail ;?> Check your mail");
     document.location.href= "login_page.php";
 </script>
