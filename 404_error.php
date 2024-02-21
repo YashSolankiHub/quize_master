@@ -10,7 +10,7 @@
     
 </style>
 </head>
-<body>
+<body background="img/Blur Bg.png">
 <div class="container">
     <div>
         <h1 class="error-message">404</h1>
@@ -22,10 +22,4 @@
 </html>
 
 
-<td class="font-size-td"><?php echo $row['sr_no'] ?> </td>
-                            <td class="font-size-td"><?php echo $row['enrollment'] ?> </td>
-                            <td class="font-size-td"><?php echo $row['student_name'] ?> </td>
-                            <td class="font-size-td"><?php echo $row['mail_id'] ?> </td>
-                            <td><button class="change_mail-button">Change Mail</button></td>
-                            <td><button class="resend_mail-button">Resend Mail</button></td>
-                            <td><button class="profile-button">Profile</button></td>
+

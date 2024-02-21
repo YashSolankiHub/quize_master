@@ -23,6 +23,15 @@ if (isset($enrollment)) {
     $num = false;
 }
 
+$total_student_query = "select count(*)as total_student from enrollment ";
+$r=mysqli_query($conn,$total_student_query);
+$row_total_student = mysqli_fetch_assoc($r);
+$total_student = $row_total_student['total_student'];
+// echo $total_student;
+
+
+
+
 
 
 ?>
@@ -174,7 +183,7 @@ if (isset($enrollment)) {
                 <tbody>
                     <tr>
                         <td style="background-color: rgb(247, 247, 247);border:none;font-size: 15px;">TOTAL STUDENT</td>
-                        <td style="background-color: rgb(247, 247, 247);border:none;font-size: 15px;">186</td>
+                        <td style="background-color: rgb(247, 247, 247);border:none;font-size: 15px;"><?php echo $total_student; ?></td>
                         <td style="background-color: rgb(247, 247, 247);border:none"></td>
                         <td style="background-color: rgb(247, 247, 247);border:none"></td>
                         <td colspan="3" style="background-color: rgb(247, 247, 247);border:none;">
