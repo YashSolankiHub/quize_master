@@ -8,67 +8,9 @@
 
 <title>Know Your Password</title>
 <link rel="icon" href="logo/qm.png" type="image/x-icon">
+<link rel="stylesheet" href="style/1_know_password.css">
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-    }
-    .container {
-        width: 370px;
-        margin: 100px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        height: 310px;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-    .form-group label {
-        display: block;
-        font-weight: bold;
-        color: darkslategray;
-    }
-    .form-group input {
-        width: 100%;
-        padding: 5px 0;
-        border: none;
-        border-bottom: 1px solid rgb(168, 168, 168);
-        outline: none;
-        font-size: 17px;
-    }
-    .btn {
-        width: 100%;
-        padding: 12px;
-        background-color: darkslategray;
-        border: none;
-        border-radius: 5px;
-        color: #fff;
-        cursor: pointer;
-        margin-top: 5px;
-        font-size: 20px;
-
-    }
-    .btn:hover {
-        background-color: #333;
-    }
-    .h{
-        text-align: left;
-        color: darkslategray;
-    }
-    .logo_with_name{
-        display: flex;
-    }
-    .back_to_login_page_a{
-        color: rgb(0, 103, 184);
-        text-decoration: none;
-    }
-    .back_to_login_page_a:hover{
-        text-decoration: underline;
-    }
+    
 </style>
 </head>
 <body background="img/Blur Bg.png">

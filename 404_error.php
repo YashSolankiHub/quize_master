@@ -5,43 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>404 Error - Page Not Found</title>
 <link rel="icon" href="logo/qm.png" type="image/x-icon">
+<link rel="stylesheet" href="style/404_error.css">
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-    }
-    .container {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-    .error-message {
-        color: darkslategray;
-        font-size: 3rem;
-        margin-bottom: 20px;
-    }
-    .error-description {
-        color: darkslategray;
-        font-size: 1.2rem;
-        margin-bottom: 20px;
-    }
-    .button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: darkslategray;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-    }
-    .button:hover {
-        background-color: #333;
-    }
+    
 </style>
 </head>
 <body>
