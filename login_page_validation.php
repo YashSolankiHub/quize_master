@@ -2,12 +2,7 @@
 session_start();
 
 
-$servername = "localhost";
-$username = "root";
-$ps = "";
-$database = "quize_master";
-
-$conn = mysqli_connect($servername, $username, $ps, $database);
+include "limit_enrollment_for_login.php";
 
 // Check connection
 if (!$conn) {
@@ -74,7 +69,7 @@ $num = mysqli_num_rows($result);
         <h3 class="h">Login</h3>
         <form action="login_page_validation.php" method="post">
             <div class="form-group">
-                <input type="number" id="enrollment" name="enrollment" placeholder="Enrollment number" min="2304070100001" max="2304070100187" required>
+                <input type="number" id="enrollment" name="enrollment" placeholder="Enrollment number" min="<?php echo $min;?>" max="<?php echo $max;?>" required>
             </div>
             <div class="form-group">
 

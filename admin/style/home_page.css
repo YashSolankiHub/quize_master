@@ -1,0 +1,126 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    /* display: flex;
+    justify-content: center; */
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 50%;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+    appearance: none;
+    /* Remove default arrow */
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: #4caf50;
+}
+
+select option {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+select option:hover {
+    background-color: #e0e0e0;
+}
+
+#selectedSubject {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.center_all_semester_head {
+    text-align: center;
+}
+
+.color_for_container-fluid {
+    background-color: darkslategray;
+    height: 60px;
+}
+
+.color_for_nav_text {
+    color: white;
+}
+
+.for_card {
+    width: 80%;
+}
+
+.for_left_side_card {
+    margin-left: 135px;
+}
+
+.semester {
+    margin-top: 30px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow-x: hidden;
+    /* Hide horizontal scrollbar */
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 50%;
+    text-align: center;
+}
+
+/* Remove margin from the right and bottom of the .semester div */
+.semester {
+    margin-right: 0;
+    margin-bottom: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+/* Adjust padding and margin for the cards */
+.for_card {
+    width: 90%;
+    /* Adjusted width for better fit */
+    margin: 0 auto;
+    /* Centering the cards */
+}
+
+/* Adjust margin for the left side cards */
+.for_left_side_card {
+    margin-left: 37.2px;
+}
+
+.navbar-brand:hover {
+    color: white;
+}
