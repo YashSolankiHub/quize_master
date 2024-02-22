@@ -96,10 +96,10 @@ if (!$num) {
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'notprimary9@gmail.com';
-        $mail->Password = 'pyifecuecsuqtyzr';
+
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
-        $mail->setFrom('notprimary9@gmail.com');
+
         $mail->addAddress("$email");
         $mail->isHTML(true);
         $mail->Subject = 'QuizeMaster';
