@@ -36,6 +36,10 @@ try {
         </script>";
 }
 
+$s = "SELECT *FROM enrollment WHERE enrollment = '$enrollment'";
+$r = mysqli_query($conn, $s);
+$n= mysqli_num_rows($r);
+
 
 $md_pass = md5($password);
 $sql = "SELECT *FROM enrollment WHERE password = '$md_pass'";
@@ -75,16 +79,25 @@ $num = mysqli_num_rows($result);
 
                 <input style="margin-top: 5px;" type="password" id="password" name="password" placeholder="Password" required>
                 <?php
-                if (!$num) {
-                ?>
+                if(!$n) {
+                    ?>
+                    <p style="color:red"> <?php echo "*Enrollment not available" ?></p>
+                    <p style="color: orange;">Know your password <a href="1_know_password.php" class="click_here_a">click here</a></p>
+                
+                    <?php  
+                } elseif (!$num) { 
+                    ?>
                     <p style="color:red"> <?php echo "*Incorrect password!" ?></p>
                     <p style="color: orange;">Know your password <a href="1_know_password.php" class="click_here_a">click here</a></p>
-                <?php } else {
+                    <?php 
+                } else {
                     $_SESSION['enrollment'] = $enrollment;
                     echo "<script>
                                 window.location.href = 'home_page.php';
-                        </script> ";
-                } ?>
+                          </script> ";
+                }
+            ?>
+                
 
 
             </div>

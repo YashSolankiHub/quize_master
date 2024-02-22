@@ -56,7 +56,28 @@
 
     $row = mysqli_fetch_assoc($result);
 
-    $email = $row['mail_id'];
+    function customErrorHandler1($errno, $errstr, $errfile, $errline) {
+        // Check if the error level is among those you want to convert into exceptions
+        if (error_reporting() === 0 || !in_array($errno, [E_WARNING, E_NOTICE])) {
+            return;
+        }
+    
+        // Throw an exception
+        throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+    }
+    
+    // Set custom error handler
+    set_error_handler('customErrorHandler1');
+    
+    try {
+        // Trigger a PHP warning
+        $email = $row['mail_id'];
+    } catch (ErrorException $e) {
+        // Catch the exception
+        echo "<script>
+        window.location.href ='404_error.php';
+            </script>";
+    }
 
 
     $characters = $email.$enrollment;

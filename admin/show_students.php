@@ -17,6 +17,14 @@ if (isset($enrollment)) {
     $record_result = mysqli_query($conn, $record);
     $record_row = mysqli_fetch_assoc($record_result);
     $num = true;
+
+    $x = mysqli_num_rows($record_result);
+    if (!$x) {
+        echo "<script>
+        alert('Enrollment number not valid');
+        window.location.href = 'show_students.php';
+            </script>";
+    }
 } else {
     $sql = "select *from enrollment";
     $result = mysqli_query($conn, $sql);
@@ -24,7 +32,7 @@ if (isset($enrollment)) {
 }
 
 $total_student_query = "select count(*)as total_student from enrollment ";
-$r=mysqli_query($conn,$total_student_query);
+$r = mysqli_query($conn, $total_student_query);
 $row_total_student = mysqli_fetch_assoc($r);
 $total_student = $row_total_student['total_student'];
 // echo $total_student;
@@ -151,7 +159,7 @@ $total_student = $row_total_student['total_student'];
                         <li class="nav-item ">
                             <a class="nav-link active " aria-current="page" href="home_page.php" style="color: white;">Home</a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item" style="border:1px solid white;border-radius:15px">
                             <a class="nav-link active " aria-current="page" href="show_students.php" style="color: white;">Students</a>
                         </li>
 
@@ -187,10 +195,10 @@ $total_student = $row_total_student['total_student'];
                         <td style="background-color: rgb(247, 247, 247);border:none"></td>
                         <td style="background-color: rgb(247, 247, 247);border:none"></td>
                         <td colspan="3" style="background-color: rgb(247, 247, 247);border:none;">
-                                <form action="show_students.php" method="post" class="input-group mb-3">
-                                    <input type="number" class="form-control" placeholder="Search Enrollment" name="enrollment" min="<?php echo $min; ?>" max="<?php echo $max; ?> " required>
-                                    <span class="input-group-text" id="basic-addon2"><button class="search-button">Search</button></span>
-                                </form>
+                            <form action="show_students.php" method="post" class="input-group mb-3">
+                                <input type="number" class="form-control" placeholder="Search Enrollment" name="enrollment" min="<?php echo $min; ?>" max="<?php echo $max; ?> " required>
+                                <span class="input-group-text" id="basic-addon2"><button class="search-button">Search</button></span>
+                            </form>
                         </td>
 
 
@@ -201,7 +209,7 @@ $total_student = $row_total_student['total_student'];
                         <td style="background-color: rgb(247, 247, 247) ;color: rgb(47, 79, 79);" class="font-size-th">NAME</td>
                         <td style="background-color: rgb(247, 247, 247) ;color: rgb(47, 79, 79);" class="font-size-th">MAIL ID</td>
                         <td style="background-color: rgb(247, 247, 247) ;color: rgb(47, 79, 79);" class="font-size-th">CHANGE MAIL</td>
-                        <td style="background-color: rgb(247, 247, 247) ;color: rgb(47, 79, 79);" class="font-size-th">RESEND PASSWORD</td>
+                        <td style="background-color: rgb(247, 247, 247) ;color: rgb(47, 79, 79);" class="font-size-th">PASSWORD</td>
                         <td style="background-color: rgb(247, 247, 247) ;color: rgb(47, 79, 79);" class="font-size-th">PROFILE</td>
                     </tr>
                     <?php
@@ -212,8 +220,20 @@ $total_student = $row_total_student['total_student'];
                             <td class="font-size-td"><?php echo $record_row['enrollment'] ?> </td>
                             <td class="font-size-td"><?php echo $record_row['student_name'] ?> </td>
                             <td class="font-size-td"><?php echo $record_row['mail_id'] ?> </td>
-                            <td style="text-align: center;"><button class="change_mail-button">Change Mail</button></td>
-                            <td style="text-align: center;"><button class="resend_mail-button" >Resend</button></td>
+                            <td style="text-align: center;">
+                                <form action="modal_show_students.php" method="post">
+                                    <input type="hidden" name="enrollment_for_modal" value="<?php echo $record_row['enrollment']; ?>">
+                                    <input type="hidden" name="mail_for_modal" value="<?php echo $record_row['mail_id']; ?>">
+                                    <button type="submit" class="change_mail-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" value="">
+                                        Change
+                                    </button>
+                                </form>
+                            </td>
+                            <td style="text-align: center;"><form action="resend_mail.php" method="post">
+                                        <input type="hidden" name="enrollment" value="<?php  echo $record_row['enrollment']; ?>">
+                                        <input type="hidden" name="mail" value="<?php  echo $record_row['mail_id']; ?>">
+                                        <button type="submit" name="resend" class="resend_mail-button">Send</button>
+                                    </form></td>
                             <td><button class="profile-button" onclick="back()">Profile</button></td>
                         </tr>
                         <?php
@@ -224,8 +244,22 @@ $total_student = $row_total_student['total_student'];
                                 <td class="font-size-td"><?php echo $row['enrollment'] ?> </td>
                                 <td class="font-size-td"><?php echo $row['student_name'] ?> </td>
                                 <td class="font-size-td"><?php echo $row['mail_id'] ?> </td>
-                                <td style="text-align: center;"><button class="change_mail-button">Change Mail</button></td>
-                                <td style="text-align: center;"><button class="resend_mail-button">Resend</button></td>
+                                <td style="text-align: center;">
+                                    <form action="modal_show_students.php" method="post">
+                                        <input type="hidden" name="enrollment_for_modal" value="<?php echo $row['enrollment']; ?>">
+                                        <input type="hidden" name="mail_for_modal" value="<?php echo $row['mail_id']; ?>">
+                                        <button type="submit" class="change_mail-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" value="">
+                                            Change
+                                        </button>
+                                    </form>
+                                </td>
+                                <td style="text-align: center;">
+                                    <form action="resend_mail.php" method="post">
+                                        <input type="hidden" name="enrollment" value="<?php  echo $row['enrollment']; ?>">
+                                        <input type="hidden" name="mail" value="<?php  echo $row['mail_id']; ?>">
+                                        <button type="submit" name="resend" class="resend_mail-button">Send</button>
+                                    </form>
+                                </td>
                                 <td><button class="profile-button">Profile</button></td>
                             </tr>
                     <?php }
@@ -237,13 +271,17 @@ $total_student = $row_total_student['total_student'];
 
                 </tbody>
             </table>
+
+
         </section>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         <script>
             function back() {
                 window.location.href = 'show_students.php';
             }
         </script>
+
 </body>
 
 </html>
