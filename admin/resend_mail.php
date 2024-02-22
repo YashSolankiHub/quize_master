@@ -32,10 +32,10 @@ require 'phpmailer/src/SMTP.php';
     $remail->Host = 'smtp.gmail.com';
     $remail->SMTPAuth = true;
     $remail->Username = 'notprimary9@gmail.com';
-    $remail->Password = 'pyifecuecsuqtyzr';
+
     $remail->SMTPSecure = 'ssl';
     $remail->Port = 465;
-    $remail->setFrom('notprimary9@gmail.com');
+
     $remail->addAddress("$mail");
     $remail->isHTML(true);
     $remail->Subject = 'QuizeMaster';
