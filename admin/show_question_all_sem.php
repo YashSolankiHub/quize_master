@@ -1,66 +1,3 @@
-<?php
-session_start();
-
-// $enrollment = $_SESSION['enrollment'];
-// $enrollment='';
-// if (isset($_SESSION["enrollment"])) {
-//     $enrollment = $_SESSION["enrollment"];
-// }
-
-// echo $enrollment;
-
-function customErrorHandler($errno, $errstr, $errfile, $errline) {
-    // Check if the error level is among those you want to convert into exceptions
-    if (error_reporting() === 0 || !in_array($errno, [E_WARNING, E_NOTICE])) {
-        return;
-    }
-
-    // Throw an exception
-    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-}
-
-// Set custom error handler
-set_error_handler('customErrorHandler');
-
-try {
-    // Trigger a PHP warning
-    $enrollment = $_SESSION['enrollment'];
-} catch (ErrorException $e) {
-    // Catch the exception
-    echo "<script>
-    window.location.href ='404_error.php';
-        </script>";
-}
-
-
-
-
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "quize_master";
-
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$sql = "select *from enrollment";
-$result = mysqli_query($conn, $sql);
-
-$student_name = "";
-while ($row = mysqli_fetch_assoc($result)) {
-    if ($enrollment == $row['enrollment']) {
-        $student_name = $row['student_name'];
-        $enrollment= $row['enrollment'];
-
-        break;
-    }
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,35 +5,44 @@ while ($row = mysqli_fetch_assoc($result)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
+    <title>Admin - Home page</title>
     <link rel="icon" href="logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style/home_page.css">
     <style>
-        
+        .li-hover:hover{
+            background-color: rgb(247, 247, 247);
+            color: black;
+        }
     </style>
 </head>
 
 <body>
-
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-top: -8px;">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary"  style="margin-top: -8px;">
             <div class="container-fluid color_for_container-fluid">
                 <a class="navbar-brand color_for_nav_text" href="#">QuizMaster</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item ">
                             <a class="nav-link active " aria-current="page" href="home_page.php" style="color: white;">Home</a>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active " aria-current="page" href="show_students.php" style="color: white;">Students</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active " aria-current="page" href="all_sem_select_subject.php" style="color: white;">Add Questions</a>
+                        </li>
+                        <li class="nav-item " style="border:1px solid white;border-radius:15px">
+                            <a class="nav-link active " aria-current="page" href="show_question_all_sem.php" style="color: white;">Show Questions</a>
+                        </li>
 
                     </ul>
                     <form class="d-flex" role="search">
-                        <h6 style="margin-right: 60px; margin-top:6px; color:white"><?php echo $student_name; ?></h6>
-                        <button type="button" class="btn btn-light" style="margin-right: 15px;">Profile</button>
-                        <button type="button" class="btn btn-light" style="margin-right: 27px;" onclick="home()">Logout</button>
+                        <button type="button" class="btn btn-light"  onclick="home()" style="margin-right: 26px;">Logout</button>
                     </form>
                     <script>
                         function home() {
@@ -109,6 +55,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
         </nav>
     </header>
+
     <div class="semester">
 
 
@@ -119,14 +66,18 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="card-body">
                         <h2 class="card-title center_all_semester_head">Semester 1</h2>
                         <div class="container">
-                            <h5>Select a Subject</h5>
-                            <select id="subjectSelect">
-                                <option value="">--select--</option>
-                                <option value="PHP">PHP</option>
-                                <option value="CN">CN</option>
-                                <option value="HTML">HTML</option>
-                                <option value="CS">CS</option>
+                            <h5>Select Subject</h5>
+                            <form action="sem1/show_question_page.php" method="post">
+                            <select id="subjectSelect" class="form-select" name="subject" onchange="this.form.submit()">
+                                <option value="0">--select--</option>
+                                <option value="java">Core Java</option>
+                                <option value="python">Python</option>
+                                <option value="dbms">Database Management System</option>
+                                <option value="dms">Descrete Mathematics Structure</option>
+                                <option value="cs">Communication Skills</option>
                             </select>
+                            <input type="hidden" name="sem" value="1">
+                            </form>
                             <div id="selectedSubject"></div>
                         </div>
                     </div>
@@ -138,8 +89,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="card-body">
                         <h2 class="card-title center_all_semester_head">Semester 2</h2>
                         <div class="container">
-                            <h5>Select a Subject</h5>
-                            <select id="subjectSelect">
+                            <h5>Select Subject</h5>
+                            <select id="subjectSelect" class="form-select">
                                 <option value="">--select--</option>
                                 <option value="PHP">PHP</option>
                                 <option value="CN">CN</option>
@@ -157,8 +108,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="card-body">
                         <h2 class="card-title center_all_semester_head">Semester 3</h2>
                         <div class="container">
-                            <h5>Select a Subject</h5>
-                            <select id="subjectSelect">
+                            <h5>Select Subject</h5>
+                            <select id="subjectSelect" class="form-select">
                                 <option value="">--select--</option>
                                 <option value="PHP">PHP</option>
                                 <option value="CN">CN</option>
@@ -176,8 +127,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="card-body">
                         <h2 class="card-title center_all_semester_head">Semester 4</h2>
                         <div class="container">
-                            <h5>Select a Subject</h5>
-                            <select id="subjectSelect">
+                            <h5>Select Subject</h5>
+                            <select id="subjectSelect" class="form-select">
                                 <option value="">--select--</option>
                                 <option value="PHP">PHP</option>
                                 <option value="CN">CN</option>
@@ -191,6 +142,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
         </div>
     </div>
+    
 
 </body>
 

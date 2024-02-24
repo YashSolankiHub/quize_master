@@ -163,6 +163,9 @@ $mail_from_show_students = $_POST['mail_for_modal'];
                         <li class="nav-item" style="border:1px solid white;border-radius:15px">
                             <a class="nav-link active " aria-current="page" href="show_students.php" style="color: white;">Students</a>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active " aria-current="page" href="all_sem_select_subject.php" style="color: white;">Add Questions</a>
+                        </li>
 
                     </ul>
                     <form class="d-flex" role="search">
