@@ -1,22 +1,74 @@
 <?php
+session_start();
 include "../db_connection.php";
-$sem = $_POST['sem'];
-$subject = $_POST['subject'];
 
-if ($subject == 'java') {
-    $select_query = "SELECT *FROM sem1_java";
-    $result = $conn->query($select_query);
-    $num = mysqli_num_rows($result);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $sem = $_POST['sem'];
+    $subject = $_POST['subject'];
+} else {
+    $sem = $_SESSION['sem'];
+    $subject = $_SESSION['subject'];
+}
+if ($sem == 1) {
 
-    if($num == 0)
-        {
+
+    if ($subject == 'java') {
+        $select_query = "SELECT *FROM sem1_java";
+        $result = $conn->query($select_query);
+        $num = mysqli_num_rows($result);
+
+        if ($num == 0) {
             echo "<script>
             alert('Semester 1 - Core Java : No questions Available!')
             window.location.href = '../show_question_all_sem.php';
             </script>";
         }
-}
+    } elseif ($subject == 'python') {
+        $select_query = "SELECT *FROM sem1_python";
+        $result = $conn->query($select_query);
+        $num = mysqli_num_rows($result);
 
+        if ($num == 0) {
+            echo "<script>
+            alert('Semester 1 - Pyhton Programming : No questions Available!')
+            window.location.href = '../show_question_all_sem.php';
+            </script>";
+        }
+    } elseif ($subject == 'dbms') {
+        $select_query = "SELECT *FROM sem1_dbms";
+        $result = $conn->query($select_query);
+        $num = mysqli_num_rows($result);
+
+        if ($num == 0) {
+            echo "<script>
+            alert('Semester 1 - Database Management System : No questions Available!')
+            window.location.href = '../show_question_all_sem.php';
+            </script>";
+        }
+    } elseif ($subject == 'dms') {
+        $select_query = "SELECT *FROM sem1_dms";
+        $result = $conn->query($select_query);
+        $num = mysqli_num_rows($result);
+
+        if ($num == 0) {
+            echo "<script>
+            alert('Semester 1 - Descrete Mathematics Structure : No questions Available!')
+            window.location.href = '../show_question_all_sem.php';
+            </script>";
+        }
+    } elseif ($subject == 'cs') {
+        $select_query = "SELECT *FROM sem1_cs";
+        $result = $conn->query($select_query);
+        $num = mysqli_num_rows($result);
+
+        if ($num == 0) {
+            echo "<script>
+            alert('Semester 1 - Communication Skills : No questions Available!')
+            window.location.href = '../show_question_all_sem.php';
+            </script>";
+        }
+    }
+}
 ?>
 
 
@@ -27,7 +79,7 @@ if ($subject == 'java') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Number of questions and time</title>
-    <link rel="icon" href="logo/qm.png" type="image/x-icon">
+    <link rel="icon" href="../logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/home_page.css">
     <style>
@@ -91,13 +143,27 @@ if ($subject == 'java') {
                             <h3 class="card-title center_all_semester_head">Semester <?php echo $sem; ?></h3>
                             <h3>: <?php if ($subject == 'java') {
                                         echo "Core Java";
-                                    } ?></h3>
-                            <form action="delete_question.php" method="post">
-                                <input type="hidden" name="subject" value="<?php echo $subject; ?>">
-                            <button class="btn btn-danger" style="margin-left: 17em;">Delete</button>
-                            </form>
+                                    } elseif ($subject == 'python') {
+                                        echo " Python Programming";
+                                    } elseif ($subject == 'dbms') {
+                                        echo " Database Management System";
+                                    } elseif ($subject == 'dms') {
+                                        echo " Descrete Mathematics Structure";
+                                    } elseif ($subject == 'cs') {
+                                        echo " Communication Skills";
+                                    }
+                                    ?></h3>
+
                         </div>
-                        <form action="update_question.php" method="post">
+                        
+                            <form action="delete_question.php" method="post" id="dq">
+                                <input type="hidden" name="subject" value="<?php echo $subject; ?>">
+                                <input type="hidden" name="sem" value="<?php echo $sem; ?>">
+                                <div class="d-flex justify-content-end">
+                                    <button id="dq" type="submit" class="btn btn-danger">Delete all questions</button>
+                                </div>
+                            </form>
+                            <form action="update_question.php" method="post">
                             <?php
 
                             $i = 1;
@@ -107,6 +173,9 @@ if ($subject == 'java') {
                                 <div class="form-floating">
                                     <input type="text" class="form-control" name="question<?php echo $i; ?>" id="q" style="height: 100px" value="<?php echo $row['question']; ?>" required></input>
                                     <label for="q" style="font-size: 24px;">Question <?php echo $i; ?></label>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <a href="delete_single_question.php?no=<?php echo $row['sr_no']; ?>&sem=<?php echo $sem; ?>&subject=<?php echo $subject; ?>">Delete question</a>
                                 </div>
                                 <br>
                                 <div class="form-floating">
@@ -125,7 +194,7 @@ if ($subject == 'java') {
                                     <input type="text" name="<?php echo $i; ?>-4" class="form-control fs-option" id="4" placeholder="Option 1" value="<?php echo $row['option4'] ?>" required>
                                     <label for="4">option 4</label>
                                 </div>
-                                
+
                                 <br>
                                 <div class="form-floating">
                                     <select class="form-select" name="ans-<?php echo $i; ?>" style="font-size: 14px;" id="floatingSelect" aria-label="Floating label select example">
@@ -153,6 +222,7 @@ if ($subject == 'java') {
                                 <button type="submit" class="btn btn-primary" style="background-color: rgb(47, 79, 79);border:none;">Save Changes</button>
                             </div>
                             <input type="hidden" name="subject" value="<?php echo $subject; ?>">
+                            <input type="hidden" name="sem" value="<?php echo $sem; ?>">
                             <input type="hidden" name="noq" value="<?php echo $num; ?>">
                         </form>
                     </div>

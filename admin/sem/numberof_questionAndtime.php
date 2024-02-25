@@ -21,7 +21,7 @@ if ($subject == "0") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Number of questions and time</title>
-    <link rel="icon" href="logo/qm.png" type="image/x-icon">
+    <link rel="icon" href="../logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/home_page.css">
     <style>
@@ -77,7 +77,11 @@ if ($subject == "0") {
                     <div class="card-body">
                         <h3 class="card-title center_all_semester_head">Semester <?php echo $sem ; ?></h3>
                         <form action="add_questions_page.php" method="post">
-                        <input type="text" class="form-control" id="" placeholder="Subject :<?php if($subject == 'java'){echo " Core Java";} ?>" disabled>
+                        <input type="text" class="form-control" id="" placeholder="Subject :<?php if($subject == 'java'){echo " Core Java";}
+                        elseif($subject == 'python'){echo " Python Programming";} 
+                        elseif($subject == 'dbms'){echo " Database Management System";}
+                        elseif($subject == 'dms'){echo " Descrete Mathematics Structure";}
+                        elseif($subject == 'cs'){echo " Communication Skills";}?>" disabled>
                         <br>
                         <input type="number" name="noq" class="form-control" id="" placeholder="Number Of Questions"  required>
                         <br>

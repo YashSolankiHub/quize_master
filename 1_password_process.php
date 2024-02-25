@@ -95,7 +95,7 @@ if (!$num) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'notprimary9@gmail.com';
+        $mail->Username = 'quizemaster.mca@gmail.com';
 
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;

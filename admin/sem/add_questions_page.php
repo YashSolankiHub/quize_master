@@ -18,7 +18,7 @@ $subject = $_POST['subject'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Number of questions and time</title>
-    <link rel="icon" href="logo/qm.png" type="image/x-icon">
+    <link rel="icon" href="../logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/home_page.css">
     <style>
@@ -82,6 +82,14 @@ $subject = $_POST['subject'];
                             <h3 class="card-title center_all_semester_head">Semester <?php echo $sem; ?></h3>
                             <h3>: <?php if ($subject == 'java') {
                                         echo "Core Java";
+                                    } elseif ($subject == 'python') {
+                                        echo " Python Programming";
+                                    } elseif ($subject == 'dbms') {
+                                        echo " Database Management System";
+                                    } elseif ($subject == 'dms') {
+                                        echo " Descrete Mathematics Structure";
+                                    } elseif ($subject == 'cs') {
+                                        echo " Communication Skills";
                                     } ?></h3>
                         </div>
                         <form action="add_questions.php" method="post">
@@ -97,22 +105,22 @@ $subject = $_POST['subject'];
                                     <label for="1">option 1</label>
                                 </div>
                                 <div class="form-floating option_topmargin">
-                                    <input type="text" name="<?php echo $i; ?>-2" class="form-control fs-option" id="2" placeholder="Option 1"  required>
+                                    <input type="text" name="<?php echo $i; ?>-2" class="form-control fs-option" id="2" placeholder="Option 1" required>
                                     <label for="2">option 2</label>
                                 </div>
                                 <div class="form-floating option_topmargin">
-                                    <input type="text" name="<?php echo $i; ?>-3" class="form-control fs-option" id="3" placeholder="Option 1"  required>
+                                    <input type="text" name="<?php echo $i; ?>-3" class="form-control fs-option" id="3" placeholder="Option 1" required>
                                     <label for="3">option 3</label>
                                 </div>
                                 <div class="form-floating option_topmargin">
-                                    <input type="text" name="<?php echo $i; ?>-4" class="form-control fs-option" id="4" placeholder="Option 1"  required>
+                                    <input type="text" name="<?php echo $i; ?>-4" class="form-control fs-option" id="4" placeholder="Option 1" required>
                                     <label for="4">option 4</label>
                                 </div>
 
-                                
+
                                 <br>
                                 <div class="form-floating">
-                                    <select class="form-select" name="ans-<?php echo $i;?>" style="font-size: 14px;" id="floatingSelect" aria-label="Floating label select example">
+                                    <select class="form-select" name="ans-<?php echo $i; ?>" style="font-size: 14px;" id="floatingSelect" aria-label="Floating label select example">
                                         <option value="option1">Option 1</option>
                                         <option value="option2">Option 2</option>
                                         <option value="option3">Option 3</option>
@@ -126,8 +134,9 @@ $subject = $_POST['subject'];
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary" style="background-color: rgb(47, 79, 79);border:none;">Submit</button>
                             </div>
-                            <input type="hidden" name="subject" value="<?php echo $subject;?>">
-                            <input type="hidden" name="noq" value="<?php echo $number_of_question;?>">
+                            <input type="hidden" name="subject" value="<?php echo $subject; ?>">
+                            <input type="hidden" name="noq" value="<?php echo $number_of_question; ?>">
+                            <input type="hidden" name="sem" value="<?php echo $sem ?>">
                         </form>
                     </div>
                 </div>

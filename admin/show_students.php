@@ -166,7 +166,7 @@ $total_student = $row_total_student['total_student'];
                             <a class="nav-link active " aria-current="page" href="all_sem_select_subject.php" style="color: white;">Add Questions</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active " aria-current="page" href="" style="color: white;">Show Questions</a>
+                            <a class="nav-link active " aria-current="page" href="show_question_all_sem.php" style="color: white;">Show Questions</a>
                         </li>
 
                     </ul>

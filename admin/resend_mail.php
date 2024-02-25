@@ -31,7 +31,7 @@ require 'phpmailer/src/SMTP.php';
     $remail->isSMTP();
     $remail->Host = 'smtp.gmail.com';
     $remail->SMTPAuth = true;
-    $remail->Username = 'notprimary9@gmail.com';
+    $remail->Username = 'quizemaster.mca@gmail.com';
 
     $remail->SMTPSecure = 'ssl';
     $remail->Port = 465;

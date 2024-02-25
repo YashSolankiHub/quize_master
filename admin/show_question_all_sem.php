@@ -67,11 +67,11 @@
                         <h2 class="card-title center_all_semester_head">Semester 1</h2>
                         <div class="container">
                             <h5>Select Subject</h5>
-                            <form action="sem1/show_question_page.php" method="post">
+                            <form action="sem/show_question_page.php" method="post">
                             <select id="subjectSelect" class="form-select" name="subject" onchange="this.form.submit()">
                                 <option value="0">--select--</option>
                                 <option value="java">Core Java</option>
-                                <option value="python">Python</option>
+                                <option value="python">Python Programming</option>
                                 <option value="dbms">Database Management System</option>
                                 <option value="dms">Descrete Mathematics Structure</option>
                                 <option value="cs">Communication Skills</option>
