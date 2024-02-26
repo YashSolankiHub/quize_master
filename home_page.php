@@ -119,14 +119,20 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="card-body">
                         <h2 class="card-title center_all_semester_head">Semester 1</h2>
                         <div class="container">
-                            <h5>Select a Subject</h5>
-                            <select id="subjectSelect">
-                                <option value="">--select--</option>
-                                <option value="PHP">PHP</option>
-                                <option value="CN">CN</option>
-                                <option value="HTML">HTML</option>
-                                <option value="CS">CS</option>
+                            <h5>Select Subject</h5>
+                            <form action="modal_exam_sure.php" method="post">
+                            <select id="subjectSelect" class="form-select" name="subject" onchange="this.form.submit()">
+                                <option value="0">--select--</option>
+                                <option value="java">Core Java</option>
+                                <option value="python">Python Programming</option>
+                                <option value="dbms">Database Management System</option>
+                                <option value="dms">Descrete Mathematics Structure</option>
+                                <option value="cs">Communication Skills</option>
                             </select>
+                            <input type="hidden" name="sem" value="1">
+                            <input type="hidden" name="student_name" value="<?php echo $student_name;?>">
+                            <input type="hidden" name="enrollment" value="<?php echo $enrollment;?>">
+                            </form>
                             <div id="selectedSubject"></div>
                         </div>
                     </div>
@@ -138,8 +144,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="card-body">
                         <h2 class="card-title center_all_semester_head">Semester 2</h2>
                         <div class="container">
-                            <h5>Select a Subject</h5>
-                            <select id="subjectSelect">
+                            <h5>Select Subject</h5>
+                            <select id="subjectSelect" class="form-select">
                                 <option value="">--select--</option>
                                 <option value="PHP">PHP</option>
                                 <option value="CN">CN</option>
@@ -157,8 +163,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="card-body">
                         <h2 class="card-title center_all_semester_head">Semester 3</h2>
                         <div class="container">
-                            <h5>Select a Subject</h5>
-                            <select id="subjectSelect">
+                            <h5>Select Subject</h5>
+                            <select id="subjectSelect" class="form-select">
                                 <option value="">--select--</option>
                                 <option value="PHP">PHP</option>
                                 <option value="CN">CN</option>
@@ -176,8 +182,8 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="card-body">
                         <h2 class="card-title center_all_semester_head">Semester 4</h2>
                         <div class="container">
-                            <h5>Select a Subject</h5>
-                            <select id="subjectSelect">
+                            <h5>Select Subject</h5>
+                            <select id="subjectSelect" class="form-select">
                                 <option value="">--select--</option>
                                 <option value="PHP">PHP</option>
                                 <option value="CN">CN</option>
@@ -191,6 +197,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
         </div>
     </div>
+
 
 </body>
 
