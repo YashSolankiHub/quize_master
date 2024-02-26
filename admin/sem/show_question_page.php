@@ -9,66 +9,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sem = $_SESSION['sem'];
     $subject = $_SESSION['subject'];
 }
-if ($sem == 1) {
 
-
-    if ($subject == 'java') {
-        $select_query = "SELECT *FROM sem1_java";
-        $result = $conn->query($select_query);
-        $num = mysqli_num_rows($result);
-
-        if ($num == 0) {
-            echo "<script>
-            alert('Semester 1 - Core Java : No questions Available!')
-            window.location.href = '../show_question_all_sem.php';
-            </script>";
-        }
-    } elseif ($subject == 'python') {
-        $select_query = "SELECT *FROM sem1_python";
-        $result = $conn->query($select_query);
-        $num = mysqli_num_rows($result);
-
-        if ($num == 0) {
-            echo "<script>
-            alert('Semester 1 - Pyhton Programming : No questions Available!')
-            window.location.href = '../show_question_all_sem.php';
-            </script>";
-        }
-    } elseif ($subject == 'dbms') {
-        $select_query = "SELECT *FROM sem1_dbms";
-        $result = $conn->query($select_query);
-        $num = mysqli_num_rows($result);
-
-        if ($num == 0) {
-            echo "<script>
-            alert('Semester 1 - Database Management System : No questions Available!')
-            window.location.href = '../show_question_all_sem.php';
-            </script>";
-        }
-    } elseif ($subject == 'dms') {
-        $select_query = "SELECT *FROM sem1_dms";
-        $result = $conn->query($select_query);
-        $num = mysqli_num_rows($result);
-
-        if ($num == 0) {
-            echo "<script>
-            alert('Semester 1 - Descrete Mathematics Structure : No questions Available!')
-            window.location.href = '../show_question_all_sem.php';
-            </script>";
-        }
-    } elseif ($subject == 'cs') {
-        $select_query = "SELECT *FROM sem1_cs";
-        $result = $conn->query($select_query);
-        $num = mysqli_num_rows($result);
-
-        if ($num == 0) {
-            echo "<script>
-            alert('Semester 1 - Communication Skills : No questions Available!')
-            window.location.href = '../show_question_all_sem.php';
-            </script>";
-        }
-    }
+if ($subject == 'java') {
+    $subject_fullname = "Core Java";
+} elseif ($subject == 'python') {
+    $subject_fullname = "Python Programming";
+} elseif ($subject == 'dbms') {
+    $subject_fullname ="Database Management System";
+} elseif ($subject == 'dms') {
+    $subject_fullname = "Descrete Mathematics Structure";
+} elseif ($subject == 'cs') {
+    $subject_fullname = "Communication Skills";
 }
+
+
+
+$select_query = "SELECT *FROM questions WHERE semester = '$sem' AND subject = '$subject'";
+$result = $conn->query($select_query);
+$num = mysqli_num_rows($result);
+
+if ($num == 0) {
+    echo "<script>
+            alert('Semester $sem - $subject_fullname : No questions Available!')
+            window.location.href = '../show_question_all_sem.php';
+            </script>";
+}
+
 ?>
 
 
@@ -141,29 +107,19 @@ if ($sem == 1) {
                     <div class="card-body">
                         <div class="d-flex">
                             <h3 class="card-title center_all_semester_head">Semester <?php echo $sem; ?></h3>
-                            <h3>: <?php if ($subject == 'java') {
-                                        echo "Core Java";
-                                    } elseif ($subject == 'python') {
-                                        echo " Python Programming";
-                                    } elseif ($subject == 'dbms') {
-                                        echo " Database Management System";
-                                    } elseif ($subject == 'dms') {
-                                        echo " Descrete Mathematics Structure";
-                                    } elseif ($subject == 'cs') {
-                                        echo " Communication Skills";
-                                    }
+                            <h3>: <?php echo $subject_fullname;
                                     ?></h3>
 
                         </div>
-                        
-                            <form action="delete_question.php" method="post" id="dq">
-                                <input type="hidden" name="subject" value="<?php echo $subject; ?>">
-                                <input type="hidden" name="sem" value="<?php echo $sem; ?>">
-                                <div class="d-flex justify-content-end">
-                                    <button id="dq" type="submit" class="btn btn-danger">Delete all questions</button>
-                                </div>
-                            </form>
-                            <form action="update_question.php" method="post">
+
+                        <form action="delete_question.php" method="post" id="dq">
+                            <input type="hidden" name="subject" value="<?php echo $subject; ?>">
+                            <input type="hidden" name="sem" value="<?php echo $sem; ?>">
+                            <div class="d-flex justify-content-end">
+                                <button id="dq" type="submit" class="btn btn-danger">Delete all questions</button>
+                            </div>
+                        </form>
+                        <form action="update_question.php" method="post">
                             <?php
 
                             $i = 1;

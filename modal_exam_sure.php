@@ -12,6 +12,19 @@ if ($subject == "0") {
         </script>";
 }
 
+if ($subject == 'java') {
+    $subject_fullname = "Core Java";
+} elseif ($subject == 'python') {
+    $subject_fullname = "Python Programming";
+} elseif ($subject == 'dbms') {
+    $subject_fullname ="Database Management System";
+} elseif ($subject == 'dms') {
+    $subject_fullname = "Descrete Mathematics Structure";
+} elseif ($subject == 'cs') {
+    $subject_fullname = "Communication Skills";
+}
+
+
 
 ?>
 
@@ -33,18 +46,7 @@ if ($subject == "0") {
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Semester: <?php echo $sem;
-                                                                            if ($subject == 'java') {
-                                                                                echo " Core Java";
-                                                                            } elseif ($subject == 'python') {
-                                                                                echo " Python Programming";
-                                                                            } elseif ($subject == 'dbms') {
-                                                                                echo " Database Management System";
-                                                                            } elseif ($subject == 'dms') {
-                                                                                echo " Descrete Mathematics Structure";
-                                                                            } elseif ($subject == 'cs') {
-                                                                                echo " Communication Skills";
-                                                                            } ?> </h3>
+                <h3 class="modal-title" id="exampleModalLabel">Semester <?php echo $sem.":".$subject_fullname; ?></h3>
             </div>
             <div class="modal-body">
                 <form action="start_exam.php" method="post" id="exam_sure">

@@ -26,22 +26,7 @@ require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 
     if (isset($_POST["resend"])) {
-    $remail = new PHPMailer(true);
-
-    $remail->isSMTP();
-    $remail->Host = 'smtp.gmail.com';
-    $remail->SMTPAuth = true;
-    $remail->Username = 'quizemaster.mca@gmail.com';
-
-    $remail->SMTPSecure = 'ssl';
-    $remail->Port = 465;
-
-    $remail->addAddress("$mail");
-    $remail->isHTML(true);
-    $remail->Subject = 'QuizeMaster';
-    $remail->Body = "Password : " . "<b>$password</b>";
-    $remail->send();
-    $hidden_mail = substr_replace($mail, str_repeat('*', strpos($mail, '@') - 3), 3, strpos($mmail, '@') - 3);
+    
 }
 
 ?>

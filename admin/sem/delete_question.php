@@ -3,60 +3,24 @@ include "../db_connection.php";
 $sem = $_POST['sem'];
 $subject = $_POST['subject'];
 
-if($sem == 1){
-
-
-if($subject == 'java')
-    {
-        $delete_query = "DELETE FROM sem1_java";
-        $conn->query($delete_query);
-
-        echo "<script>
-        alert('Semester 1 - Core Java : All Questions Deleted!');
-        window.location.href='../show_question_all_sem.php';
-        </script>";
-    }
-    elseif($subject == 'pyhton')
-    {
-        $delete_query = "DELETE FROM sem1_python";
-        $conn->query($delete_query);
-
-        echo "<script>
-        alert('Semester 1 - Python Programming : All Questions Deleted!');
-        window.location.href='../show_question_all_sem.php';
-        </script>";
-    }
-    elseif($subject == 'dbms')
-    {
-        $delete_query = "DELETE FROM sem1_dbms";
-        $conn->query($delete_query);
-
-        echo "<script>
-        alert('Semester 1 - Database Management System : All Questions Deleted!');
-        window.location.href='../show_question_all_sem.php';
-        </script>";
-    }
-    elseif($subject == 'dms')
-    {
-        $delete_query = "DELETE FROM sem1_dms";
-        $conn->query($delete_query);
-
-        echo "<script>
-        alert('Semester 1 - Descrete Mathematics Structure : All Questions Deleted!');
-        window.location.href='../show_question_all_sem.php';
-        </script>";
-    }
-    elseif($subject == 'cs')
-    {
-        $delete_query = "DELETE FROM sem1_cs";
-        $conn->query($delete_query);
-
-        echo "<script>
-        alert('Semester 1 - Communication Skills : All Questions Deleted!');
-        window.location.href='../show_question_all_sem.php';
-        </script>";
-    }
+if ($subject == 'java') {
+    $subject_fullname = "Core Java";
+} elseif ($subject == 'python') {
+    $subject_fullname = "Python Programming";
+} elseif ($subject == 'dbms') {
+    $subject_fullname ="Database Management System";
+} elseif ($subject == 'dms') {
+    $subject_fullname = "Descrete Mathematics Structure";
+} elseif ($subject == 'cs') {
+    $subject_fullname = "Communication Skills";
 }
 
-?>
 
+$delete_query = "DELETE FROM questions WHERE semester = $sem AND subject = '$subject'";
+$conn->query($delete_query);
+
+echo "<script>
+        alert('Semester $sem - $subject_fullname : All Questions Deleted!');
+        window.location.href='../show_question_all_sem.php';
+    </script>";
+?>

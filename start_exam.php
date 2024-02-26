@@ -5,6 +5,19 @@ $subject = $_POST['subject'];
 $student_name = $_POST['student_name'];
 $enrollment = $_POST['enrollment'];
 
+if ($subject == 'java') {
+    $subject_fullname = "Core Java";
+} elseif ($subject == 'python') {
+    $subject_fullname = "Python Programming";
+} elseif ($subject == 'dbms') {
+    $subject_fullname ="Database Management System";
+} elseif ($subject == 'dms') {
+    $subject_fullname = "Descrete Mathematics Structure";
+} elseif ($subject == 'cs') {
+    $subject_fullname = "Communication Skills";
+}
+
+
 
 // echo $sem;
 // echo "<br>";
@@ -14,13 +27,11 @@ $enrollment = $_POST['enrollment'];
 // echo "<br>";
 // echo $enrollment;
 
-if ($sem == 1) {
-    if ($subject == 'java') {
-        $select = "SELECT *FROM sem1_java";
+
+        $select = "SELECT *FROM questions WHERE semester = $sem AND subject = '$subject'";
         $result = $conn->query($select);
         $num = mysqli_num_rows($result);
-    }
-}
+
 
 ?>
 
@@ -73,13 +84,9 @@ if ($sem == 1) {
 
                     <div class="card-body">
                         <div class="question">
-                            <h2 class="card-title center_all_semester_head">Semester <?php echo $sem;?>: <?php if($subject == 'java'){echo " Core Java";}
-                        elseif($subject == 'python'){echo " Python Programming";} 
-                        elseif($subject == 'dbms'){echo " Database Management System";}
-                        elseif($subject == 'dms'){echo " Descrete Mathematics Structure";}
-                        elseif($subject == 'cs'){echo " Communication Skills";}?></h2>
-                            <div class="container">
+                            <h2 class="card-title center_all_semester_head">Semester <?php echo $sem.":".$subject_fullname;?></h2>
                                 <?php  $qn=1;while($row = mysqli_fetch_assoc($result)){ ?>
+                            <div class="container" style="margin-bottom: 20px;">
                                 <div class="question" style="margin-bottom: 20px;">
                                     <h5 style="text-align: left;"> Q<?php echo $qn.": ".$row['question'] ?>
                                     </h5>
@@ -96,12 +103,13 @@ if ($sem == 1) {
                                     <label class="btn btn-outline-secondary option" for="<?php echo $qn."4";?>" style="margin-top: 10px;"><?php echo $row['option4'];?></label>
                                     <br>
                                 </div>
-                                <?php $qn++;} ?>
+                                
                                 
 
 
 
                             </div>
+                            <?php $qn++;} ?>
                         </div>
 
                     </div>

@@ -5,101 +5,33 @@ $subject = $_POST['subject'];
 $number_of_question = $_POST['noq'];
 $sem = $_POST['sem'];
 
-// echo $number_of_question;
-if ($sem == 1) {
-
-    if ($subject == 'java') {
-        for ($i = 1; $i <= $number_of_question; $i++) {
-            $question = $_POST["question$i"];
-            $option1 = $_POST["$i-1"];
-            $option2 = $_POST["$i-2"];
-            $option3 = $_POST["$i-3"];
-            $option4 = $_POST["$i-4"];
-
-            $answer = $_POST["ans-$i"];
-
-            $insert_query = "INSERT INTO sem1_java(question, option1, option2, option3, option4, answer)
-                    VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer')";
-            $conn->query($insert_query);
-        }
-        echo "<script>
-                alert('Semester 1 - Core Java : Questions Added');
-                window.location.href='../all_sem_select_subject.php';
-                </script>";
-    } elseif ($subject == 'python') {
-        for ($i = 1; $i <= $number_of_question; $i++) {
-            $question = $_POST["question$i"];
-            $option1 = $_POST["$i-1"];
-            $option2 = $_POST["$i-2"];
-            $option3 = $_POST["$i-3"];
-            $option4 = $_POST["$i-4"];
-
-            $answer = $_POST["ans-$i"];
-
-            $insert_query = "INSERT INTO sem1_python(question, option1, option2, option3, option4, answer)
-                        VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer')";
-            $conn->query($insert_query);
-        }
-        echo "<script>
-                alert('Semester 1 - Python Programming : Questions Added');
-                window.location.href='../all_sem_select_subject.php';
-                </script>";
-    }
-    elseif ($subject == 'dbms') {
-        for ($i = 1; $i <= $number_of_question; $i++) {
-            $question = $_POST["question$i"];
-            $option1 = $_POST["$i-1"];
-            $option2 = $_POST["$i-2"];
-            $option3 = $_POST["$i-3"];
-            $option4 = $_POST["$i-4"];
-
-            $answer = $_POST["ans-$i"];
-
-            $insert_query = "INSERT INTO sem1_dbms(question, option1, option2, option3, option4, answer)
-                        VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer')";
-            $conn->query($insert_query);
-        }
-        echo "<script>
-                alert('Semester 1 - Database Management System : Questions Added');
-                window.location.href='../all_sem_select_subject.php';
-                </script>";
-    }
-    elseif ($subject == 'dms') {
-        for ($i = 1; $i <= $number_of_question; $i++) {
-            $question = $_POST["question$i"];
-            $option1 = $_POST["$i-1"];
-            $option2 = $_POST["$i-2"];
-            $option3 = $_POST["$i-3"];
-            $option4 = $_POST["$i-4"];
-
-            $answer = $_POST["ans-$i"];
-
-            $insert_query = "INSERT INTO sem1_dms(question, option1, option2, option3, option4, answer)
-                        VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer')";
-            $conn->query($insert_query);
-        }
-        echo "<script>
-                alert('Semester 1 - Descrete Mathematics Structure : Questions Added');
-                window.location.href='../all_sem_select_subject.php';
-                </script>";
-    }
-    elseif ($subject == 'cs') {
-        for ($i = 1; $i <= $number_of_question; $i++) {
-            $question = $_POST["question$i"];
-            $option1 = $_POST["$i-1"];
-            $option2 = $_POST["$i-2"];
-            $option3 = $_POST["$i-3"];
-            $option4 = $_POST["$i-4"];
-
-            $answer = $_POST["ans-$i"];
-
-            $insert_query = "INSERT INTO sem1_cs(question, option1, option2, option3, option4, answer)
-                        VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer')";
-            $conn->query($insert_query);
-        }
-        echo "<script>
-                alert('Semester 1 - Communication Skills : Questions Added');
-                window.location.href='../all_sem_select_subject.php';
-                </script>";
-    }
+if ($subject == 'java') {
+    $subject_fullname = "Core Java";
+} elseif ($subject == 'python') {
+    $subject_fullname = "Python Programming";
+} elseif ($subject == 'dbms') {
+    $subject_fullname ="Database Management System";
+} elseif ($subject == 'dms') {
+    $subject_fullname = "Descrete Mathematics Structure";
+} elseif ($subject == 'cs') {
+    $subject_fullname = "Communication Skills";
 }
+
+
+for ($i = 1; $i <= $number_of_question; $i++) {
+    $question = $_POST["question$i"];
+    $option1 = $_POST["$i-1"];
+    $option2 = $_POST["$i-2"];
+    $option3 = $_POST["$i-3"];
+    $option4 = $_POST["$i-4"];
+
+    $answer = $_POST["ans-$i"];
+
+    $insert_query = "INSERT INTO questions(question, option1, option2, option3, option4, answer, semester, subject)
+                    VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer', '$sem', '$subject')";
+    $conn->query($insert_query);
+}
+echo "<script>
+                alert('Semester $sem - $subject_fullname : Questions Added');
+                window.location.href='../all_sem_select_subject.php';
+                </script>";
