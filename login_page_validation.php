@@ -42,7 +42,7 @@ $n= mysqli_num_rows($r);
 
 
 $md_pass = md5($password);
-$sql = "SELECT *FROM enrollment WHERE password = '$md_pass'";
+$sql = "SELECT *FROM enrollment WHERE enrollment = '$enrollment' AND password = '$md_pass'";
 $result = mysqli_query($conn, $sql);
 $num = mysqli_num_rows($result);
 
@@ -91,10 +91,11 @@ $num = mysqli_num_rows($result);
                     <p style="color: orange;">Know your password <a href="1_know_password.php" class="click_here_a">click here</a></p>
                     <?php 
                 } else {
-                    $_SESSION['enrollment'] = $enrollment;
+                   $_SESSION['enrollment'] = $enrollment;
                     echo "<script>
                                 window.location.href = 'home_page.php';
                           </script> ";
+                    
                 }
             ?>
                 
@@ -105,5 +106,6 @@ $num = mysqli_num_rows($result);
         </form>
     </div>
 </body>
+
 
 </html>

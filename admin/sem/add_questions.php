@@ -7,14 +7,19 @@ $sem = $_POST['sem'];
 
 if ($subject == 'java') {
     $subject_fullname = "Core Java";
+    $subject_code = "23MCA101";
 } elseif ($subject == 'python') {
     $subject_fullname = "Python Programming";
+    $subject_code = "23MCA102";
 } elseif ($subject == 'dbms') {
     $subject_fullname ="Database Management System";
+    $subject_code = "23MCA103";
 } elseif ($subject == 'dms') {
     $subject_fullname = "Descrete Mathematics Structure";
+    $subject_code = "23MCA104";
 } elseif ($subject == 'cs') {
     $subject_fullname = "Communication Skills";
+    $subject_code = "23MCA105";
 }
 
 
@@ -27,8 +32,8 @@ for ($i = 1; $i <= $number_of_question; $i++) {
 
     $answer = $_POST["ans-$i"];
 
-    $insert_query = "INSERT INTO questions(question, option1, option2, option3, option4, answer, semester, subject)
-                    VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer', '$sem', '$subject')";
+    $insert_query = "INSERT INTO questions(question, option1, option2, option3, option4, answer, semester, subject, date)
+                    VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer', '$sem', '$subject',NOW())";
     $conn->query($insert_query);
 }
 echo "<script>

@@ -24,7 +24,15 @@ set_error_handler('customErrorHandler');
 
 try {
     // Trigger a PHP warning
-    $enrollment = $_SESSION['enrollment'];
+    if(isset($_SESSION['enrollment']))
+        {
+            $enrollment = $_SESSION['enrollment'];
+        }
+    else
+        {
+            $enrollment = $_POST['enrollment'];
+        }
+    
 } catch (ErrorException $e) {
     // Catch the exception
     echo "<script>

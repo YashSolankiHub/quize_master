@@ -1,4 +1,5 @@
 <?php
+include "db_connection.php";
 $subject = $_POST['subject'];
 $sem = $_POST['sem'];
 $student_name = $_POST['student_name'];
@@ -8,21 +9,54 @@ $enrollment = $_POST['enrollment'];
 
 if ($subject == "0") {
     echo "<script>
-        window.location.href='../all_sem_select_subject.php';
+        window.location.href='home_page.php';
         </script>";
 }
 
+
 if ($subject == 'java') {
     $subject_fullname = "Core Java";
+    $subject_code = "23MCA101";
 } elseif ($subject == 'python') {
     $subject_fullname = "Python Programming";
+    $subject_code = "23MCA102";
 } elseif ($subject == 'dbms') {
     $subject_fullname ="Database Management System";
+    $subject_code = "23MCA103";
 } elseif ($subject == 'dms') {
     $subject_fullname = "Descrete Mathematics Structure";
+    $subject_code = "23MCA104";
 } elseif ($subject == 'cs') {
     $subject_fullname = "Communication Skills";
+    $subject_code = "23MCA105";
 }
+
+
+
+$sql = "SELECT *FROM questions WHERE semester = $sem AND subject = '$subject'";
+$result = $conn->query($sql);
+$num = mysqli_num_rows($result);
+
+$select = "SELECT *FROM result WHERE enrollment = '$enrollment' AND subject_code = '$subject_code'";
+$execute = $conn->query($select);
+$num1 = mysqli_num_rows($execute);
+
+if(!($num > 0))
+{
+    echo "<script>
+        alert('Semester $sem - $subject_fullname : Questions not available at this moment!');
+        window.location.href='home_page.php';
+        </script>";
+}
+elseif($num1)
+    {
+        echo "<script>
+        alert('Semester $sem - $subject_fullname : You have already given this exam');
+        window.location.href='home_page.php';
+        </script>";
+    }
+
+
 
 
 
@@ -46,7 +80,7 @@ if ($subject == 'java') {
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Semester <?php echo $sem.":".$subject_fullname; ?></h3>
+                <h3 class="modal-title" id="exampleModalLabel">Semester <?php echo $sem.": ".$subject_fullname; ?></h3>
             </div>
             <div class="modal-body">
                 <form action="start_exam.php" method="post" id="exam_sure">
