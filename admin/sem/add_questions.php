@@ -4,6 +4,9 @@ include "../db_connection.php";
 $subject = $_POST['subject'];
 $number_of_question = $_POST['noq'];
 $sem = $_POST['sem'];
+$time = $_POST['time'];
+
+
 
 if ($subject == 'java') {
     $subject_fullname = "Core Java";
@@ -32,8 +35,8 @@ for ($i = 1; $i <= $number_of_question; $i++) {
 
     $answer = $_POST["ans-$i"];
 
-    $insert_query = "INSERT INTO questions(question, option1, option2, option3, option4, answer, semester, subject, date)
-                    VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer', '$sem', '$subject',NOW())";
+    $insert_query = "INSERT INTO questions(question, option1, option2, option3, option4, answer, semester, subject, subject_code, time, date)
+                    VALUES ('$question', '$option1', '$option2','$option3', '$option4', '$answer', '$sem', '$subject','$subject_code', '$time', NOW())";
     $conn->query($insert_query);
 }
 echo "<script>

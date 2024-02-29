@@ -68,7 +68,7 @@ elseif($num1)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Students</title>
+    <title>Exam:<?php echo " ".$subject_fullname;  ?></title>
     <link rel="icon" href="logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -83,7 +83,7 @@ elseif($num1)
                 <h3 class="modal-title" id="exampleModalLabel">Semester <?php echo $sem.": ".$subject_fullname; ?></h3>
             </div>
             <div class="modal-body">
-                <form action="start_exam.php" method="post" id="exam_sure">
+                <form action="start_exam.php" method="post" id="exam_sure" target="_blank">
                     <h4>Exam starts in <span id="countdown">10</span> seconds </h4>
 
             </div>
@@ -94,6 +94,11 @@ elseif($num1)
                 <input type="hidden" name="student_name" value="<?php echo $student_name;?>">
                 <input type="hidden" name="enrollment" value="<?php echo $enrollment;?>">
                 
+                </form>
+
+
+                <form action="home_page.php" method="post" id="back_to_home">
+                    <input type="hidden" name="enrollment" value="<?php echo $enrollment; ?>">
                 </form>
             </div>
         </div>
@@ -126,6 +131,26 @@ elseif($num1)
 
     // Call the countdown function when the page loads
     countdown();
+    
+    function countdown1() {
+        var second1 = 10; // Change this to the desired number of seconds
+
+        // Update countdown element every second
+        var countdownInterval1 = setInterval(function() {
+            second1--;
+
+            // If countdown reaches 0, redirect
+            if (second1 <= 0) {
+                clearInterval(countdownInterval1); // Stop the countdown
+                document.getElementById('back_to_home').submit();
+            }
+        }, 1000); // 1000 milliseconds = 1 second
+    }
+
+
+    countdown1();
+    
+
 </script>
 </body>
 

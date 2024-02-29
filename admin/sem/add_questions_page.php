@@ -137,6 +137,7 @@ $subject = $_POST['subject'];
                             <input type="hidden" name="subject" value="<?php echo $subject; ?>">
                             <input type="hidden" name="noq" value="<?php echo $number_of_question; ?>">
                             <input type="hidden" name="sem" value="<?php echo $sem ?>">
+                            <input type="hidden" name="time" value="<?php echo $time ?>">
                         </form>
                     </div>
                 </div>

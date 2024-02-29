@@ -66,7 +66,7 @@ $per = ($correct * 100) / $total_question;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
+    <title>Result: <?php echo $subject_fullname?></title>
     <link rel="icon" href="logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style/home_page.css">
@@ -91,7 +91,41 @@ $per = ($correct * 100) / $total_question;
             text-align: left;
         }
 
- 
+        .txt {
+            width: 60%;
+            margin-top: 10px;
+            border: 1px solid black;
+            color: black;
+        }
+
+        .correct-sign {
+            width: 100px;
+            height: 100px;
+            position: relative;
+        }
+
+        .check {
+            width: 12px;
+            height: 29px;
+            border-right: 5px solid rgb(25, 135, 84);
+            border-bottom: 5px solid rgb(25, 135, 84);
+            transform: rotate(45deg);
+            margin-left: 18px;
+            margin-top: 7px;
+        }
+
+        .wrong {
+            color: red;
+
+            font-size: 31px;
+            font-weight: 500;
+            margin-left: 9px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            position: relative;
+            top: 6px;
+        }
+  
     </style>
 
 </head>
@@ -106,15 +140,17 @@ $per = ($correct * 100) / $total_question;
                 <div class="card for_card for_left_side_card">
                     <h2 class="card-title center_all_semester_head"> Semester <?php echo $sem . ":" . $subject_fullname; ?></h2>
                     <div class="card-body">
-              
+
 
                         <div class="question">
                             <form action="check_answer.php" method="post">
                                 <div class="d-flex justify-content-center">
-                                <span><Button class="btn btn-success" disabled>Correct: <?php echo $correct; ?></Button> <button class="btn btn-danger" disabled>Wrong: <?php echo $wrong; ?></button></span>
+                                    <input type="text" style="background-color: rgb(25, 135, 84);width:45%;color:white;text-align:center;" class="form-control" value="Correct: <?php echo $correct; ?>" disabled>
+                                    <input type="text" style="background-color: rgb(220, 53, 69);width:45%;color:white;text-align:center;" class="form-control" value="Wrong: <?php echo $wrong; ?>" disabled>
+
                                 </div>
                                 <?php $qn = 1;
-                                
+
                                 while ($row = mysqli_fetch_assoc($result1)) {
                                     $answer = $row['answer'];
                                     $selected_option = $_POST["option-for-$qn"];
@@ -126,68 +162,117 @@ $per = ($correct * 100) / $total_question;
                                             <h5 style="text-align: left;"> Q<?php echo $qn . ": " . $row['question'] ?>
                                             </h5>
                                             <?php
-                                            if ($answer == "option1") { ?>
-                                                <input type="radio" value="option1" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "1"; ?>" autocomplete="off" checked disabled>
-                                                <label class="btn btn-success option" for="<?php echo $qn . "1"; ?>" style="margin-top: 10px;"><?php echo $row['option1']; ?></label>
+                                            if ($answer == "option1" and $selected_option == "option1") { ?>
 
-                                            <?php } elseif($selected_option == "option1") {?>
-                                                <input type="radio" value="option1" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "1"; ?>" autocomplete="off" checked disabled>
-                                                <label class="btn btn-danger option" for="<?php echo $qn . "1"; ?>" style="margin-top: 10px;"><?php echo $row['option1']; ?></label>
+                                                <div class="d-flex" style="height: 47.5px;">
+                                                    <input type="radio" value="option1" class="btn-check h" name="" id="" style="color:white;">
+                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option1']; ?></label>
+                                                    <div class="correct-sign">
+                                                        <div class="check"></div>
+                                                    </div>
+                                                </div>
+                                                
+                                            <?php } elseif($answer == "option1" and $selected_option != "option1") { ?>
+                                                <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;" disabled>
+                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option1']; ?></label>
+                                                    <div class="d-flex justify-content-end">
+                                                    <div style="color: rgb(25, 135, 84);margin-top:-25px;"> <b>Correct answer</b></div>
+                                                    </div>
+                                                    
+                                            <?php } elseif ($selected_option == "option1") { ?>
+                                                <div class="d-flex">
+                                                    <input type="text" style="background-color: rgb(220, 53, 69);color:white;" value="<?php echo $row['option1'] ?>" class="form-control txt" disabled>
+                                                    <span class="wrong"><b>X</b></span>
+                                                </div>
+                                            <?php } else { ?>
+                                                <input type="text" value="<?php echo $row['option1'] ?>" class="form-control txt" disabled>
 
-                                            <?php }else { ?>
-                                                <input type="radio" value="option1" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "1"; ?>" autocomplete="off" disabled>
-                                                <label class="btn btn-outline-secondary option" for="<?php echo $qn . "1"; ?>" style="margin-top: 10px;"><?php echo $row['option1']; ?></label>
+                                            <?php } ?>
 
-                                                <?php }  ?>
-                                            <br>
                                             <?php
-                                            if ($answer == "option2") { ?>
-                                                <input type="radio" value="option2" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "2"; ?>" autocomplete="off" checked disabled>
-                                                <label class="btn btn-success option" for="<?php echo $qn . "2"; ?>" style="margin-top: 10px;"><?php echo $row['option2']; ?></label>
+                                            if ($answer == "option2" and $selected_option == "option2") { ?>
 
-                                            <?php } elseif($selected_option == "option2") {?>
-                                                <input type="radio" value="option2" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "2"; ?>" autocomplete="off" checked disabled>
-                                                <label class="btn btn-danger option" for="<?php echo $qn . "2"; ?>" style="margin-top: 10px;"><?php echo $row['option2']; ?></label>
+                                                <div class="d-flex" style="height: 47.5px;">
+                                                    <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;">
+                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option2']; ?></label>
+                                                    <div class="correct-sign">
+                                                        <div class="check"></div>
+                                                    </div>
+                                                </div>
+                                                
+                                            <?php } elseif($answer == "option2" and $selected_option != "option2") { ?>
+                                                <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;" disabled>
+                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option2']; ?></label>
+                                                    <div class="d-flex justify-content-end">
+                                                    <div style="color: rgb(25, 135, 84);margin-top:-25px;"> <b>Correct answer</b></div>
+                                                    </div>
+                                            <?php } elseif ($selected_option == "option2") { ?>
+                                                <div class="d-flex">
+                                                    <input type="text" style="background-color: rgb(220, 53, 69);color:white;" value="<?php echo $row['option2'] ?>" class="form-control txt" disabled>
+                                                    <span class="wrong"><b>X</b></span>
+                                                </div>
+                                            <?php } else { ?>
+                                                <input type="text" value="<?php echo $row['option2'] ?>" class="form-control txt" disabled>
 
-                                            <?php }else { ?>
-                                                <input type="radio" value="option2" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "2"; ?>" autocomplete="off" disabled>
-                                                <label class="btn btn-outline-secondary option" for="<?php echo $qn . "2"; ?>" style="margin-top: 10px;"><?php echo $row['option2']; ?></label>
+                                            <?php } ?>
 
-                                                <?php }  ?>
-                                            
-                                            <br>
+
                                             <?php
-                                            if ($answer == "option3") { ?>
-                                                <input type="radio" value="option3" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "3"; ?>" autocomplete="off" checked disabled>
-                                                <label class="btn btn-success option" for="<?php echo $qn . "3"; ?>" style="margin-top: 10px;"><?php echo $row['option3']; ?></label>
+                                            if ($answer == "option3" and $selected_option == "option3") { ?>
 
-                                            <?php } elseif($selected_option == "option3") {?>
-                                                <input type="radio" value="option3" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . ""; ?>" autocomplete="off" checked disabled>
-                                                <label class="btn btn-danger option" for="<?php echo $qn . "3"; ?>" style="margin-top: 10px;"><?php echo $row['option3']; ?></label>
+                                                <div class="d-flex" style="height: 47.5px;">
+                                                    <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;">
+                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option3']; ?></label>
+                                                    <div class="correct-sign">
+                                                        <div class="check"></div>
+                                                    </div>
+                                                </div>
+                                                
+                                            <?php } elseif($answer == "option3" and $selected_option != "option3") { ?>
+                                                <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;" disabled>
+                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option3']; ?></label>
+                                                    <div class="d-flex justify-content-end">
+                                                    <div style="color: rgb(25, 135, 84);margin-top:-25px;"> <b>Correct answer</b></div>
+                                                    </div>
+                                            <?php } elseif ($selected_option == "option3") { ?>
+                                                <div class="d-flex">
+                                                    <input type="text" style="background-color: rgb(220, 53, 69);color:white;" value="<?php echo $row['option3'] ?>" class="form-control txt" disabled>
+                                                    <span class="wrong"><b>X</b></span>
+                                                </div>
+                                            <?php } else { ?>
+                                                <input type="text" value="<?php echo $row['option3'] ?>" class="form-control txt" disabled>
 
-                                            <?php }else { ?>
-                                                <input type="radio" value="option3" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "3"; ?>" autocomplete="off" disabled>
-                                                <label class="btn btn-outline-secondary option" for="<?php echo $qn . "3"; ?>" style="margin-top: 10px;"><?php echo $row['option3']; ?></label>
+                                            <?php } ?>
 
-                                                <?php }  ?>
+                                            <?php
+                                            if ($answer == "option4" and $selected_option == "option4") { ?>
 
-                                                <?php
-                                            if ($answer == "option4") { ?>
-                                                <input type="radio" value="option4" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "4"; ?>" autocomplete="off" checked disabled>
-                                                <label class="btn btn-success option" for="<?php echo $qn . "4"; ?>" style="margin-top: 10px;"><?php echo $row['option4']; ?></label>
+                                                <div class="d-flex" style="height: 47.5px;">
+                                                    <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;">
+                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option4']; ?></label>
+                                                    <div class="correct-sign">
+                                                        <div class="check"></div>
+                                                    </div>
+                                                </div>
+                                                
+                                            <?php } elseif($answer == "option4" and $selected_option != "option4") { ?>
+                                                <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;" disabled>
+                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option4']; ?></label>
+                                                    <div class="d-flex justify-content-end">
+                                                    <div style="color: rgb(25, 135, 84);margin-top:-25px;"> <b>Correct answer</b></div>
+                                                    </div>
+                                            <?php } elseif ($selected_option == "option4") { ?>
+                                                <div class="d-flex">
+                                                    <input type="text" style="background-color: rgb(220, 53, 69);color:white;" value="<?php echo $row['option4'] ?>" class="form-control txt" disabled>
+                                                    <span class="wrong"><b>X</b></span>
+                                                </div>
+                                            <?php } else { ?>
+                                                <input type="text" value="<?php echo $row['option4'] ?>" class="form-control txt" disabled>
 
-                                            <?php } elseif($selected_option == "option3") {?>
-                                                <input type="radio" value="option4" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "4"; ?>" autocomplete="off" checked disabled> 
-                                                <label class="btn btn-danger option" for="<?php echo $qn . "4"; ?>" style="margin-top: 10px;"><?php echo $row['option4']; ?></label>
+                                            <?php } ?>
 
-                                            <?php }else { ?>
-                                                <input type="radio" value="option4" class="btn-check" name="option-for-<?php echo $qn; ?>" id="<?php echo $qn . "4"; ?>" autocomplete="off" disabled>
-                                                <label class="btn btn-outline-secondary option" for="<?php echo $qn . "4"; ?>" style="margin-top: 10px;"><?php echo $row['option4']; ?></label>
-
-                                                <?php }  ?>
-                                            
                                             <br>
-                                           
+
                                         </div>
 
                                     </div>

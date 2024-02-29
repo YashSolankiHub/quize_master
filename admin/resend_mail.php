@@ -27,11 +27,12 @@ require 'phpmailer/src/SMTP.php';
 
 if (isset($_POST["resend"])) {
     
+   
 }
 
 ?>
 
 <script>
-    alert("Password sent successfully to <?php echo $hidden_mail; ?> Check your mail");
+    alert("Password sent successfully to <?php echo $mail; ?>");
     document.location.href = 'show_students.php';
 </script>
