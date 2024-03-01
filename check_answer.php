@@ -52,9 +52,56 @@ while ($row1 = mysqli_fetch_assoc($result)) {
 // echo "wrong :".$wrong;
 $per = ($correct * 100) / $total_question;
 
-// $insert = "INSERT INTO result(enrollment, student_name, semester, subject_code, subject, total_question, correct, wrong, percentage, date) 
-// VALUES ('$enrollment','$student_name', $sem, '$subject_code', '$subject', $total_question, $correct, $wrong, $per, NOW())";
-// $conn->query($insert);
+
+$percentage = number_format($per, 2);
+
+if ($percentage >= 50) {
+    $status = "pass";
+} else {
+    $status = "fail";
+}
+
+// echo $round_per;
+
+$insert = "INSERT INTO result(enrollment, student_name, semester, subject_code, subject, total_question, correct, wrong, percentage, result_status, date) 
+VALUES ('$enrollment','$student_name', $sem, '$subject_code', '$subject', $total_question, $correct, $wrong, $percentage, '$status', NOW())";
+$conn->query($insert);
+
+
+if ($percentage >= 80) {
+    date_default_timezone_set("Asia/Calcutta");
+    $date =  date("d/m/Y");
+    $image = imagecreatefromjpeg("certificates/template.jpg");
+    $font = "fonts/Gloock-Regular.ttf";
+    $imageWidth = imagesx($image);
+    $textBoundingBox = imagettfbbox(25, 0, $font, $subject);
+    $textWidth = $textBoundingBox[2] - $textBoundingBox[0];
+
+    $x = ($imageWidth - $textWidth) / 2;
+
+    $color = imagecolorallocate($image, 0, 74, 173);
+    $subject_color = imagecolorallocate($image, 0, 0, 0);
+    imagettftext($image, 30, 0, 720, 540, $color, $font, $student_name);
+    imagettftext($image, 30, 0, 770, 879, $color, $font, $enrollment);
+    imagettftext($image, 30, 0, 1425, 879, $color, $font, $percentage . "%");
+    imagettftext($image, 28, 0, 1390, 1078, $color, $font, $date);
+    imagettftext($image, 35, 0, $x, 735, $subject_color, $font, $subject_fullname);
+
+    imagejpeg($image, "certificates/" . $enrollment . "_" . $subject_code . ".jpg");
+
+    $url = "certificates/" . $enrollment . "_" . $subject_code . ".jpg";
+
+    // header('Content-Type:image/jpeg');
+    // imagejpeg($image);
+
+    imagedestroy($image);
+
+    $sql = "INSERT INTO certificate (enrollment, subject_code, url, enrollment_number) VALUE ('$enrollment', '$subject_code','$url', '$enrollment')";
+    $result = $conn->query($sql);
+
+
+}
+
 
 
 ?>
@@ -66,7 +113,7 @@ $per = ($correct * 100) / $total_question;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Result: <?php echo $subject_fullname?></title>
+    <title>Result: <?php echo $subject_fullname ?></title>
     <link rel="icon" href="logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style/home_page.css">
@@ -125,7 +172,6 @@ $per = ($correct * 100) / $total_question;
             position: relative;
             top: 6px;
         }
-  
     </style>
 
 </head>
@@ -139,16 +185,31 @@ $per = ($correct * 100) / $total_question;
             <div class="col">
                 <div class="card for_card for_left_side_card">
                     <h2 class="card-title center_all_semester_head"> Semester <?php echo $sem . ":" . $subject_fullname; ?></h2>
+                    <h4> <span style="margin-left: 2em;">Result: <?php echo $status; ?></span> <span style="margin-left: 16em;">Percentage: <?php echo $percentage . "%"; ?></span> </h4>
+
+
+
                     <div class="card-body">
 
 
                         <div class="question">
-                            <form action="check_answer.php" method="post">
+                            <form action="home_page.php" method="post">
                                 <div class="d-flex justify-content-center">
                                     <input type="text" style="background-color: rgb(25, 135, 84);width:45%;color:white;text-align:center;" class="form-control" value="Correct: <?php echo $correct; ?>" disabled>
                                     <input type="text" style="background-color: rgb(220, 53, 69);width:45%;color:white;text-align:center;" class="form-control" value="Wrong: <?php echo $wrong; ?>" disabled>
 
                                 </div>
+                                <?php if ($percentage >= 80) { ?>
+                                    <div style="margin-top: 10px;">
+                                        <span style="margin-left: 2em;">Congratulation...You are eligible to get certificate</span> <a href="<?php echo $url; ?>" download="">get certificate</a>
+                                        <p style="margin-left: 2em;"><a href="#">Learn more</a> about result and certificate</p>
+                                    </div>
+                                <?php } else { ?>
+                                    <div style="margin-top: 10px;">
+                                        <span style="margin-left: 2em;">Oopss...You are not eligible to get certificate</span> 
+                                        <p style="margin-left: 2em;"><a href="#">Learn more</a> about result and certificate</p>
+                                    </div>
+                                    <?php } ?>
                                 <?php $qn = 1;
 
                                 while ($row = mysqli_fetch_assoc($result1)) {
@@ -157,8 +218,8 @@ $per = ($correct * 100) / $total_question;
                                     // echo $selected_option;
                                     // echo $answer;
                                 ?>
-                                    <div class="container" style="margin-bottom: 20px;">
-                                        <div class="question" style="margin-bottom: 20px;">
+                                    <div class="container" style="margin-top: 20px;">
+                                        <div class="question" style="margin-top: 20px;">
                                             <h5 style="text-align: left;"> Q<?php echo $qn . ": " . $row['question'] ?>
                                             </h5>
                                             <?php
@@ -171,14 +232,14 @@ $per = ($correct * 100) / $total_question;
                                                         <div class="check"></div>
                                                     </div>
                                                 </div>
-                                                
-                                            <?php } elseif($answer == "option1" and $selected_option != "option1") { ?>
+
+                                            <?php } elseif ($answer == "option1" and $selected_option != "option1") { ?>
                                                 <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;" disabled>
-                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option1']; ?></label>
-                                                    <div class="d-flex justify-content-end">
+                                                <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option1']; ?></label>
+                                                <div class="d-flex justify-content-end">
                                                     <div style="color: rgb(25, 135, 84);margin-top:-25px;"> <b>Correct answer</b></div>
-                                                    </div>
-                                                    
+                                                </div>
+
                                             <?php } elseif ($selected_option == "option1") { ?>
                                                 <div class="d-flex">
                                                     <input type="text" style="background-color: rgb(220, 53, 69);color:white;" value="<?php echo $row['option1'] ?>" class="form-control txt" disabled>
@@ -199,13 +260,13 @@ $per = ($correct * 100) / $total_question;
                                                         <div class="check"></div>
                                                     </div>
                                                 </div>
-                                                
-                                            <?php } elseif($answer == "option2" and $selected_option != "option2") { ?>
+
+                                            <?php } elseif ($answer == "option2" and $selected_option != "option2") { ?>
                                                 <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;" disabled>
-                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option2']; ?></label>
-                                                    <div class="d-flex justify-content-end">
+                                                <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option2']; ?></label>
+                                                <div class="d-flex justify-content-end">
                                                     <div style="color: rgb(25, 135, 84);margin-top:-25px;"> <b>Correct answer</b></div>
-                                                    </div>
+                                                </div>
                                             <?php } elseif ($selected_option == "option2") { ?>
                                                 <div class="d-flex">
                                                     <input type="text" style="background-color: rgb(220, 53, 69);color:white;" value="<?php echo $row['option2'] ?>" class="form-control txt" disabled>
@@ -227,13 +288,13 @@ $per = ($correct * 100) / $total_question;
                                                         <div class="check"></div>
                                                     </div>
                                                 </div>
-                                                
-                                            <?php } elseif($answer == "option3" and $selected_option != "option3") { ?>
+
+                                            <?php } elseif ($answer == "option3" and $selected_option != "option3") { ?>
                                                 <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;" disabled>
-                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option3']; ?></label>
-                                                    <div class="d-flex justify-content-end">
+                                                <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option3']; ?></label>
+                                                <div class="d-flex justify-content-end">
                                                     <div style="color: rgb(25, 135, 84);margin-top:-25px;"> <b>Correct answer</b></div>
-                                                    </div>
+                                                </div>
                                             <?php } elseif ($selected_option == "option3") { ?>
                                                 <div class="d-flex">
                                                     <input type="text" style="background-color: rgb(220, 53, 69);color:white;" value="<?php echo $row['option3'] ?>" class="form-control txt" disabled>
@@ -254,13 +315,13 @@ $per = ($correct * 100) / $total_question;
                                                         <div class="check"></div>
                                                     </div>
                                                 </div>
-                                                
-                                            <?php } elseif($answer == "option4" and $selected_option != "option4") { ?>
+
+                                            <?php } elseif ($answer == "option4" and $selected_option != "option4") { ?>
                                                 <input type="radio" value="option1" class="btn-check" name="" id="" style="color:white;" disabled>
-                                                    <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option4']; ?></label>
-                                                    <div class="d-flex justify-content-end">
+                                                <label class="btn btn-success option" for="" style="margin-top: 10px;color:white;"><?php echo $row['option4']; ?></label>
+                                                <div class="d-flex justify-content-end">
                                                     <div style="color: rgb(25, 135, 84);margin-top:-25px;"> <b>Correct answer</b></div>
-                                                    </div>
+                                                </div>
                                             <?php } elseif ($selected_option == "option4") { ?>
                                                 <div class="d-flex">
                                                     <input type="text" style="background-color: rgb(220, 53, 69);color:white;" value="<?php echo $row['option4'] ?>" class="form-control txt" disabled>
@@ -278,13 +339,14 @@ $per = ($correct * 100) / $total_question;
                                     </div>
                                 <?php $qn++;
                                 } ?>
-                                <div class="d-flex justify-content-end">
+                                <div class="d-flex justify-content-end" style="margin-top: 20px;">
                                     <input type="hidden" name="enrollment" value="<?php echo $enrollment; ?>">
                                     <input type="hidden" name="student_name" value="<?php echo $student_name; ?>">
-                                    <input type="hidden" name="noq" value="<?php echo $num; ?>">
                                     <input type="hidden" name="sem" value="<?php echo $sem; ?>">
                                     <input type="hidden" name="subject" value="<?php echo $subject; ?>">
-                                    <button type="submit" class="btn btn-success" style="margin-right: 3em;width:30%">Submit</button>
+                                    <input type="hidden" name="percentage" value="<?php echo $round_per; ?>">
+                                    <input type="hidden" name="status" value="<?php echo $status; ?>">
+                                    <button type="submit" class="btn btn-success" style="margin-right: 3em;width:30%">Back to home</button>
                             </form>
 
                         </div>

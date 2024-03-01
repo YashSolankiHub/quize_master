@@ -29,6 +29,11 @@ $subject = $_POST['subject'];
         .fs-option {
             font-size: 12px;
         }
+
+        .index {
+            position: absolute;
+            z-index: 0;
+        }
     </style>
 </head>
 
@@ -98,23 +103,23 @@ $subject = $_POST['subject'];
 
                                 <div class="form-floating">
                                     <input type="text" class="form-control" name="question<?php echo $i; ?>" id="q" style="height: 100px" required></input>
-                                    <label for="q" style="font-size: 24px;">Question <?php echo $i; ?></label>
+                                    <label for="q" style="font-size: 24px;positon:absolute;z-index:0;">Question <?php echo $i; ?></label>
                                 </div>
                                 <div class="form-floating option_topmargin">
                                     <input type="text" name="<?php echo $i; ?>-1" class="form-control fs-option" id="1" placeholder="Option 1" required>
-                                    <label for="1">option 1</label>
+                                    <label for="1" class="index" style="position:absolute;z-index:0;">option 1</label>
                                 </div>
                                 <div class="form-floating option_topmargin">
                                     <input type="text" name="<?php echo $i; ?>-2" class="form-control fs-option" id="2" placeholder="Option 1" required>
-                                    <label for="2">option 2</label>
+                                    <label for="2" class="index" style="position:absolute;z-index:0;">option 2</label>
                                 </div>
                                 <div class="form-floating option_topmargin">
                                     <input type="text" name="<?php echo $i; ?>-3" class="form-control fs-option" id="3" placeholder="Option 1" required>
-                                    <label for="3">option 3</label>
+                                    <label for="3" class="index" style="position:absolute;z-index:0;">option 3</label>
                                 </div>
                                 <div class="form-floating option_topmargin">
                                     <input type="text" name="<?php echo $i; ?>-4" class="form-control fs-option" id="4" placeholder="Option 1" required>
-                                    <label for="4">option 4</label>
+                                    <label for="4" class="index" style="position:absolute;z-index:0;">option 4</label>
                                 </div>
 
 
@@ -126,7 +131,7 @@ $subject = $_POST['subject'];
                                         <option value="option3">Option 3</option>
                                         <option value="option4">Option 4</option>
                                     </select>
-                                    <label for="floatingSelect">Select Answer</label>
+                                    <label for="floatingSelect" style="position:absolute;z-index:0;">Select Answer</label>
                                 </div>
                                 <hr style="opacity: 1;">
 

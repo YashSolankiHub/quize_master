@@ -128,7 +128,7 @@ if ($num == 0) {
 
                                 <div class="form-floating">
                                     <input type="text" class="form-control" name="question<?php echo $i; ?>" id="q" style="height: 100px" value="<?php echo $row['question']; ?>" required></input>
-                                    <label for="q" style="font-size: 24px;">Question <?php echo $i; ?></label>
+                                    <label for="q" style="font-size: 24px;positon:absolute;z-index:0;">Question <?php echo $i; ?></label>
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <a href="delete_single_question.php?no=<?php echo $row['sr_no']; ?>&sem=<?php echo $sem; ?>&subject=<?php echo $subject; ?>">Delete question</a>
@@ -136,19 +136,19 @@ if ($num == 0) {
                                 <br>
                                 <div class="form-floating">
                                     <input type="text" name="<?php echo $i; ?>-1" class="form-control fs-option" id="1" placeholder="Option 1" value="<?php echo $row['option1'] ?>" required>
-                                    <label for="1">option 1</label>
+                                    <label for="1" style="position:absolute;z-index:0;">option 1</label>
                                 </div>
                                 <div class="form-floating option_topmargin">
                                     <input type="text" name="<?php echo $i; ?>-2" class="form-control fs-option" id="2" placeholder="Option 1" value="<?php echo $row['option2'] ?>" required>
-                                    <label for="2">option 2</label>
+                                    <label for="2" style="position:absolute;z-index:0;">option 2</label>
                                 </div>
                                 <div class="form-floating option_topmargin">
                                     <input type="text" name="<?php echo $i; ?>-3" class="form-control fs-option" id="3" placeholder="Option 1" value="<?php echo $row['option3'] ?>" required>
-                                    <label for="3">option 3</label>
+                                    <label for="3" style="position:absolute;z-index:0;">option 3</label>
                                 </div>
                                 <div class="form-floating option_topmargin">
                                     <input type="text" name="<?php echo $i; ?>-4" class="form-control fs-option" id="4" placeholder="Option 1" value="<?php echo $row['option4'] ?>" required>
-                                    <label for="4">option 4</label>
+                                    <label for="4" style="position:absolute;z-index:0;">option 4</label>
                                 </div>
 
                                 <br>
@@ -167,7 +167,7 @@ if ($num == 0) {
                                                                     echo 'selected';
                                                                 } ?>>Option 4</option>
                                     </select>
-                                    <label for="floatingSelect">Select Answer</label>
+                                    <label for="floatingSelect" style="position:absolute;z-index:0;">Select Answer</label>
                                 </div>
 
                                 <hr style="opacity: 1;">

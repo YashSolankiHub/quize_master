@@ -125,6 +125,7 @@ elseif($num1)
             if (seconds <= 0) {
                 clearInterval(countdownInterval); // Stop the countdown
                 document.getElementById('exam_sure').submit();
+                window.close();
             }
         }, 1000); // 1000 milliseconds = 1 second
     }
@@ -142,7 +143,8 @@ elseif($num1)
             // If countdown reaches 0, redirect
             if (second1 <= 0) {
                 clearInterval(countdownInterval1); // Stop the countdown
-                document.getElementById('back_to_home').submit();
+                window.close();
+                
             }
         }, 1000); // 1000 milliseconds = 1 second
     }

@@ -54,6 +54,7 @@ $total_student = $row_total_student['total_student'];
     <link rel="icon" href="logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style/home_page.css">
+
     <style>
         .search_input_width {
             width: 25%;
@@ -192,7 +193,7 @@ $total_student = $row_total_student['total_student'];
 
         <section class="d-flex justify-content-center">
 
-            <table class="table table-width">
+            <table class="table table-width" id="students">
 
                 <tbody>
                     <tr>
@@ -235,11 +236,13 @@ $total_student = $row_total_student['total_student'];
                                     </button>
                                 </form>
                             </td>
-                            <td style="text-align: center;"><form action="resend_mail.php" method="post">
-                                        <input type="hidden" name="enrollment" value="<?php  echo $record_row['enrollment']; ?>">
-                                        <input type="hidden" name="mail" value="<?php  echo $record_row['mail_id']; ?>">
-                                        <button type="submit" name="resend" class="resend_mail-button">Send</button>
-                                    </form></td>
+                            <td style="text-align: center;">
+                                <form action="resend_mail.php" method="post">
+                                    <input type="hidden" name="enrollment" value="<?php echo $record_row['enrollment']; ?>">
+                                    <input type="hidden" name="mail" value="<?php echo $record_row['mail_id']; ?>">
+                                    <button type="submit" name="resend" class="resend_mail-button">Send</button>
+                                </form>
+                            </td>
                             <td><button class="profile-button" onclick="back()">Profile</button></td>
                         </tr>
                         <?php
@@ -261,8 +264,8 @@ $total_student = $row_total_student['total_student'];
                                 </td>
                                 <td style="text-align: center;">
                                     <form action="resend_mail.php" method="post">
-                                        <input type="hidden" name="enrollment" value="<?php  echo $row['enrollment']; ?>">
-                                        <input type="hidden" name="mail" value="<?php  echo $row['mail_id']; ?>">
+                                        <input type="hidden" name="enrollment" value="<?php echo $row['enrollment']; ?>">
+                                        <input type="hidden" name="mail" value="<?php echo $row['mail_id']; ?>">
                                         <button type="submit" name="resend" class="resend_mail-button">Send</button>
                                     </form>
                                 </td>
@@ -287,6 +290,7 @@ $total_student = $row_total_student['total_student'];
                 window.location.href = 'show_students.php';
             }
         </script>
+    
 
 </body>
 
