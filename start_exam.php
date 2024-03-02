@@ -207,6 +207,7 @@ $time
             if (seconds <= 0) {
                 clearInterval(countdownInterval); // Stop the countdown
                 document.getElementById('exam_sure').submit();
+              
             }
         }, 1000); // 1000 milliseconds = 1 second
     }

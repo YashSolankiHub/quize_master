@@ -90,7 +90,21 @@ if (!$num) {
 
 
     if (isset($_POST["send"])) {
-       
+        $mail = new PHPMailer(true);
+
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'quizemaster.mca@gmail.com';
+        $mail->Password = 'striehocxgoaewwl';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+        $mail->setFrom('quizemaster.mca@gmail.com');
+        $mail->addAddress("$email");
+        $mail->isHTML(true);
+        $mail->Subject = 'QuizeMaster';
+        $mail->Body = "Password : " . "<b>$password</b>";
+        $mail->send();
     }
     $hidden_mail = substr_replace($email, str_repeat('*', strpos($email, '@') - 3), 3, strpos($email, '@') - 3);
     echo "<script>

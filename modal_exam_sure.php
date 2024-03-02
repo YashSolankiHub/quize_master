@@ -143,6 +143,7 @@ elseif($num1)
             // If countdown reaches 0, redirect
             if (second1 <= 0) {
                 clearInterval(countdownInterval1); // Stop the countdown
+                document.getElementById('back_to_home').submit();
                 window.close();
                 
             }
