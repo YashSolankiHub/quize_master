@@ -237,6 +237,7 @@ $num = mysqli_num_rows($execute);
                                     <th scope="col" class="ctr">Given exam</th>
                                     <th scope="col" class="ctr">Semester</th>
                                     <th scope="col" class="ctr">Percentage</th>
+                                    <th scope="col" class="ctr">Result</th>
                                     <th scope="col" class="ctr">Date</th>
                                     <th scope="col" class="ctr">Certificate</th>
                                 </tr>
@@ -247,6 +248,7 @@ $num = mysqli_num_rows($execute);
                                         <td class="ctr"><?php echo $line['subject']; ?></td>
                                         <td class="ctr"><?php echo $line['semester']; ?></td>
                                         <td class="ctr"><?php echo $line['percentage'] . "%"; ?></td>
+                                        <td class="ctr"><?php echo $line['result_status']; ?></td>
                                         <td class="ctr"><?php echo $line['date']; ?></td>
                                         <?php
                                         if ($line['subject'] == 'java') {
@@ -268,16 +270,16 @@ $num = mysqli_num_rows($execute);
                                         if ($line['percentage'] >= 80) { ?>
                                             <td class="ctr"><button class="btn btn-warning" download="" style="width: 90px;
                                             height: 25px;padding: 0;color: white;background-color:rgb(47, 79, 79);border:none;">
-                                            <a href="<?php echo $certificate_url; ?>" style="color:white;text-decoration:none;" download="" >Download</a>
-                                            </button></td>
-                                                                
-                                                
-                                        <?php }else { ?>
+                                                    <a href="<?php echo $certificate_url; ?>" style="color:white;text-decoration:none;" download="">Download</a>
+                                                </button></td>
+
+
+                                        <?php } else { ?>
                                             <td class="ctr"><button class="btn btn-warning" download="" style="width: 90px;
                                             height: 25px;padding: 0;color: white;background-color:rgb(47, 79, 79);border:none;" disabled>
-                                            <a href="#" style="color:white;text-decoration:none;">Download</a>
-                                            </button></td>
-                                                <?php } ?>
+                                                    <a href="#" style="color:white;text-decoration:none;">Download</a>
+                                                </button></td>
+                                        <?php } ?>
 
                                     </tr>
                                 <?php }
@@ -288,7 +290,7 @@ $num = mysqli_num_rows($execute);
                     </table>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

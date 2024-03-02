@@ -21,7 +21,7 @@ if ($subject == 'java') {
     $subject_fullname = "Python Programming";
     $subject_code = "23MCA102";
 } elseif ($subject == 'dbms') {
-    $subject_fullname ="Database Management System";
+    $subject_fullname = "Database Management System";
     $subject_code = "23MCA103";
 } elseif ($subject == 'dms') {
     $subject_fullname = "Descrete Mathematics Structure";
@@ -41,20 +41,17 @@ $select = "SELECT *FROM result WHERE enrollment = '$enrollment' AND subject_code
 $execute = $conn->query($select);
 $num1 = mysqli_num_rows($execute);
 
-if(!($num > 0))
-{
+if (!($num > 0)) {
     echo "<script>
         alert('Semester $sem - $subject_fullname : Questions not available at this moment!');
         window.location.href='home_page.php';
         </script>";
-}
-elseif($num1)
-    {
-        echo "<script>
+} elseif ($num1) {
+    echo "<script>
         alert('Semester $sem - $subject_fullname : You have already given this exam');
         window.location.href='home_page.php';
         </script>";
-    }
+}
 
 
 
@@ -68,7 +65,7 @@ elseif($num1)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam:<?php echo " ".$subject_fullname;  ?></title>
+    <title>Exam:<?php echo " " . $subject_fullname;  ?></title>
     <link rel="icon" href="logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -80,7 +77,7 @@ elseif($num1)
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Semester <?php echo $sem.": ".$subject_fullname; ?></h3>
+                <h3 class="modal-title" id="exampleModalLabel">Semester <?php echo $sem . ": " . $subject_fullname; ?></h3>
             </div>
             <div class="modal-body">
                 <form action="start_exam.php" method="post" id="exam_sure" target="_blank">
@@ -89,11 +86,11 @@ elseif($num1)
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <a class="btn btn-secondary" href="home_page.php">Close</a>
-                <input type="hidden" name="sem" value="<?php echo $sem;?>">
-                <input type="hidden" name="subject" value="<?php echo $subject;?>">
-                <input type="hidden" name="student_name" value="<?php echo $student_name;?>">
-                <input type="hidden" name="enrollment" value="<?php echo $enrollment;?>">
-                
+                <input type="hidden" name="sem" value="<?php echo $sem; ?>">
+                <input type="hidden" name="subject" value="<?php echo $subject; ?>">
+                <input type="hidden" name="student_name" value="<?php echo $student_name; ?>">
+                <input type="hidden" name="enrollment" value="<?php echo $enrollment; ?>">
+
                 </form>
 
 
@@ -125,16 +122,17 @@ elseif($num1)
             if (seconds <= 0) {
                 clearInterval(countdownInterval); // Stop the countdown
                 document.getElementById('exam_sure').submit();
-                window.close();
+
             }
         }, 1000); // 1000 milliseconds = 1 second
     }
 
     // Call the countdown function when the page loads
     countdown();
-    
+
+
     function countdown1() {
-        var second1 = 10; // Change this to the desired number of seconds
+        var second1 = 10.1; // Change this to the desired number of seconds
 
         // Update countdown element every second
         var countdownInterval1 = setInterval(function() {
@@ -145,15 +143,15 @@ elseif($num1)
                 clearInterval(countdownInterval1); // Stop the countdown
                 document.getElementById('back_to_home').submit();
                 window.close();
-                
+
+
+
             }
         }, 1000); // 1000 milliseconds = 1 second
     }
 
 
     countdown1();
-    
-
 </script>
 </body>
 

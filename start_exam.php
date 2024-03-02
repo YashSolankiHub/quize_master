@@ -48,7 +48,7 @@ $time
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam:<?php echo " ".$subject_fullname;  ?></title>
+    <title>Exam:<?php echo " " . $subject_fullname;  ?></title>
     <link rel="icon" href="logo/qm.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style/home_page.css">
@@ -105,7 +105,7 @@ $time
                             </div>
                             <form action="check_answer.php" method="post" target="_blank">
                                 <?php $qn = 1;
-                                while ($row = mysqli_fetch_assoc($result)) {?>
+                                while ($row = mysqli_fetch_assoc($result)) { ?>
 
                                     <div class="container" style="margin-bottom: 20px;">
                                         <div class="question" style="margin-bottom: 20px;">
@@ -134,13 +134,13 @@ $time
                                     <input type="hidden" name="noq" value="<?php echo $num; ?>">
                                     <input type="hidden" name="sem" value="<?php echo $sem; ?>">
                                     <input type="hidden" name="subject" value="<?php echo $subject; ?>">
-                                    
+
 
                                     <button type="submit" onclick="back_to_home()" class="btn btn-success" style="margin-right: 3em;width:30%">Submit</button>
                             </form>
-                                <form action="home_page.php" method="post" id="back_to_home">
-                                    <input type="hidden" name="enrollment" value="<?php echo $enrollment;?>">
-                                </form>
+                            <form action="home_page.php" method="post" id="back_to_home">
+                                <input type="hidden" name="enrollment" value="<?php echo $enrollment; ?>">
+                            </form>
                         </div>
                     </div>
 
@@ -169,59 +169,65 @@ $time
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     <form action="home_page.php" method="post">
-                    <input type="hidden" name="enrollment" value="<?php echo $enrollment; ?>">
+                        <input type="hidden" name="enrollment" value="<?php echo $enrollment; ?>">
                         <button type="submit" class="btn btn-danger">Yes</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-<script>
-    // function countdown1() 
-    // {
-    //     var second1 = 5; // Change this to the desired number of seconds
+    <script>
+        // function countdown1() 
+        // {
+        //     var second1 = 5; // Change this to the desired number of seconds
 
-    //     // Update countdown element every second
-    //     var countdownInterval1 = setInterval(function() {
-    //         second1--;
+        //     // Update countdown element every second
+        //     var countdownInterval1 = setInterval(function() {
+        //         second1--;
 
-    //         // If countdown reaches 0, redirect
-    //         if (second1 <= 0) {
-    //             clearInterval(countdownInterval1); // Stop the countdown
-    //             document.getElementById('back_to_home').submit();
-    //         }
-    //     }, 1000); // 1000 milliseconds = 1 second
-    // }
-    // countdown1();
+        //         // If countdown reaches 0, redirect
+        //         if (second1 <= 0) {
+        //             clearInterval(countdownInterval1); // Stop the countdown
+        //             document.getElementById('back_to_home').submit();
+        //         }
+        //     }, 1000); // 1000 milliseconds = 1 second
+        // }
+        // countdown1();
 
-    function countdown() {
-        var seconds = 10; // Change this to the desired number of seconds
-        var countdownElement = document.getElementById('countdown');
+        function countdown() {
+            var seconds = 10; // Change this to the desired number of seconds
+            var countdownElement = document.getElementById('countdown');
 
-        // Update countdown element every second
-        var countdownInterval = setInterval(function() {
-            seconds--;
-            countdownElement.textContent = seconds;
+            // Update countdown element every second
+            var countdownInterval = setInterval(function() {
+                seconds--;
+                countdownElement.textContent = seconds;
 
-            // If countdown reaches 0, redirect
-            if (seconds <= 0) {
-                clearInterval(countdownInterval); // Stop the countdown
-                document.getElementById('exam_sure').submit();
-              
-            }
-        }, 1000); // 1000 milliseconds = 1 second
-    }
+                // If countdown reaches 0, redirect
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval); // Stop the countdown
+                    document.getElementById('exam_sure').submit();
 
-    // Call the countdown function when the page loads
-    countdown();
+                }
+            }, 1000); // 1000 milliseconds = 1 second
+        }
+
+        // Call the countdown function when the page loads
+        countdown();
 
 
-    function back_to_home()
-        {
+        function back_to_home() {
             window.close();
         }
-        
-</script>
+
+
+        document.addEventListener("visibilitychange", function() {
+            if (document.visibilityState === 'hidden') {
+
+                window.location.href = 'warning_model.php';
+            }
+        });
+    </script>
 </body>
 
 

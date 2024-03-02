@@ -243,7 +243,12 @@ $total_student = $row_total_student['total_student'];
                                     <button type="submit" name="resend" class="resend_mail-button">Send</button>
                                 </form>
                             </td>
-                            <td><button class="profile-button" onclick="back()">Profile</button></td>
+                            <td>
+                                    <form action="modal_profile_show_students.php" method="post">
+                                        <input type="hidden" name="enrollment" value="<?php echo $record_row['enrollment']; ?>">
+                                    <button type="submit" class="profile-button">Profile</button>
+                                    </form>
+                            </td>
                         </tr>
                         <?php
                     } else {
@@ -269,7 +274,12 @@ $total_student = $row_total_student['total_student'];
                                         <button type="submit" name="resend" class="resend_mail-button">Send</button>
                                     </form>
                                 </td>
-                                <td><button class="profile-button">Profile</button></td>
+                                <td>
+                                    <form action="modal_profile_show_students.php" method="post">
+                                        <input type="hidden" name="enrollment" value="<?php echo $row['enrollment']; ?>">
+                                        <button type="submit" class="profile-button">Profile</button>
+                                    </form>
+                                </td>
                             </tr>
                     <?php }
                     } ?>
@@ -290,7 +300,9 @@ $total_student = $row_total_student['total_student'];
                 window.location.href = 'show_students.php';
             }
         </script>
-    
+
+
+
 
 </body>
 

@@ -85,7 +85,7 @@ if ($percentage >= 80) {
     imagettftext($image, 30, 0, 770, 879, $color, $font, $enrollment);
     imagettftext($image, 30, 0, 1425, 879, $color, $font, $percentage . "%");
     imagettftext($image, 28, 0, 1390, 1078, $color, $font, $date);
-    imagettftext($image, 35, 0, $x, 735, $subject_color, $font, $subject_fullname);
+    imagettftext($image, 35, 0, $x, 735, $subject_color, $font, "'".$subject_fullname."'");
 
     imagejpeg($image, "certificates/" . $enrollment . "_" . $subject_code . ".jpg");
 
