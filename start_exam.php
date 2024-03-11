@@ -4,6 +4,7 @@ $sem = $_POST['sem'];
 $subject = $_POST['subject'];
 $student_name = $_POST['student_name'];
 $enrollment = $_POST['enrollment'];
+$exam_id = $_POST['exam_id'];
 
 if ($subject == 'java') {
     $subject_fullname = "Core Java";
@@ -31,6 +32,14 @@ if ($subject == 'java') {
 $select = "SELECT *FROM questions WHERE semester = $sem AND subject = '$subject'";
 $result = $conn->query($select);
 $num = mysqli_num_rows($result);
+
+$s = "SELECT time_minutes FROM questions WHERE semester = $sem AND subject = '$subject'";
+$r = $conn->query($s);
+$line = mysqli_fetch_assoc($r);
+
+$time = $line['time_minutes'];
+// echo $time;
+
 
 
 
@@ -84,14 +93,22 @@ $time
 </head>
 
 <body>
+    <div class="d-flex justify-content-center">
+        <p style="color:red;margin-top:20px;font-size:18px;">Note : Do not close/change tab or minimize the browser during exam <br> Your exam will close automatically after the time is over.<br> You have to submit the exam within the given time. <br> That is why you have to submit the exam within the given time.</p>
+    </div>
 
-    <div class="semester">
+
+    <div class="semester" style="margin-top:0px;">
 
 
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <div class="col">
                 <div class="card for_card for_left_side_card">
                     <h2 class="card-title center_all_semester_head"> Semester <?php echo $sem . ":" . $subject_fullname; ?></h2>
+                    <div class="d-flex justify-content-center">
+                        <h4>Remainning Time: <span id="countdown" style="color: red;"><?php echo $time; ?></span> minutes </h4>
+                        </h4>
+                    </div>
                     <div class="card-body">
                         <div class="question">
 
@@ -177,43 +194,34 @@ $time
         </div>
     </div>
     <script>
-        // function countdown1() 
-        // {
-        //     var second1 = 5; // Change this to the desired number of seconds
-
-        //     // Update countdown element every second
-        //     var countdownInterval1 = setInterval(function() {
-        //         second1--;
-
-        //         // If countdown reaches 0, redirect
-        //         if (second1 <= 0) {
-        //             clearInterval(countdownInterval1); // Stop the countdown
-        //             document.getElementById('back_to_home').submit();
-        //         }
-        //     }, 1000); // 1000 milliseconds = 1 second
-        // }
-        // countdown1();
-
         function countdown() {
-            var seconds = 10; // Change this to the desired number of seconds
+            var minutes = 1; // Change this to the desired number of minutes
+            var seconds = minutes * 60; // Convert minutes to seconds
             var countdownElement = document.getElementById('countdown');
 
             // Update countdown element every second
             var countdownInterval = setInterval(function() {
-                seconds--;
-                countdownElement.textContent = seconds;
+                minutes = Math.floor(seconds / 60); // Calculate remaining minutes
+                var remainingSeconds = seconds % 60; // Calculate remaining seconds
+
+                // Format the time display
+                var display = minutes + ":" + (remainingSeconds < 10 ? "0" : "") + remainingSeconds;
+                countdownElement.textContent = display;
 
                 // If countdown reaches 0, redirect
                 if (seconds <= 0) {
                     clearInterval(countdownInterval); // Stop the countdown
-                    document.getElementById('exam_sure').submit();
-
+                    // Perform any action needed when countdown reaches 0
+                    window.location.href='end_exam_warning_model.php';
                 }
+
+                seconds--; // Decrement seconds
             }, 1000); // 1000 milliseconds = 1 second
         }
 
         // Call the countdown function when the page loads
         countdown();
+
 
 
         function back_to_home() {

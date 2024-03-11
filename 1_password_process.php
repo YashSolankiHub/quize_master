@@ -90,7 +90,7 @@ if (!$num) {
 
 
     if (isset($_POST["send"])) {
-        
+       
     }
     $hidden_mail = substr_replace($email, str_repeat('*', strpos($email, '@') - 3), 3, strpos($email, '@') - 3);
     echo "<script>

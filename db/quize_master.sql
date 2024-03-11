@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2024 at 09:13 PM
+-- Generation Time: Mar 03, 2024 at 04:29 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `quize_master`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `certificate`
+--
+
+CREATE TABLE `certificate` (
+  `sr_no` int(2) NOT NULL,
+  `enrollment` varchar(15) NOT NULL,
+  `subject_code` varchar(10) NOT NULL,
+  `url` varchar(50) NOT NULL,
+  `date_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `enrollment_number` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -45,7 +60,7 @@ INSERT INTO `enrollment` (`sr_no`, `enrollment`, `student_name`, `password`, `ma
 (3, '2304070100003', 'AAJAGIYA SHRUTI MANOJBHAI', '58401a6f96e7b0790ea9c94aa5fc7188', 'example2304070100003@demo.com'),
 (4, '2304070100004', 'ANSARI MD KAIF SAGIR AHMED', '', 'example2304070100004@demo.com'),
 (5, '2304070100005', 'ASODIYA ESVA KUMANBHAI', '', 'example2304070100005@demo.com'),
-(6, '2304070100006', 'AWASTHI AYUSH VINODKUMAR', '', 'example2304070100006@demo.com'),
+(6, '2304070100006', 'AWASTHI AYUSH VINODKUMAR', '8e5ec0eeffffc631cea4e86417bb719b', 'example2304070100006@demo.com'),
 (7, '2304070100007', 'BAMBHAROLIYA KRINA RAJUBHAI', '', 'example2304070100007@demo.com'),
 (8, '2304070100008', 'BAROT MIHIRKUMAR DIPAKBHAI', '', 'example2304070100008@demo.com'),
 (9, '2304070100009', 'BHAVSAR ABHISHEK DINESHBHAI', '', 'example2304070100009@demo.com'),
@@ -200,7 +215,7 @@ INSERT INTO `enrollment` (`sr_no`, `enrollment`, `student_name`, `password`, `ma
 (158, '2304070100160', 'SUTARIYA JEMIN SURESHBHAI', '', 'example2304070100160@demo.com'),
 (159, '2304070100161', 'SUTARIYA RAVI RAMESHBHAI', '', 'example2304070100161@demo.com'),
 (160, '2304070100162', 'THAKKAR VANSHITA NARESHKUMAR', '', 'example2304070100162@demo.com'),
-(161, '2304070100163', 'THAKOR DHRUV DINESHBHAI', '', 'dhruv22042003@gmail.com'),
+(161, '2304070100163', 'THAKOR DHRUV DINESHBHAI', 'b21a510c362754b8c2c9fe36d6db26b5', 'dhruv22042003@gmail.com'),
 (162, '2304070100164', 'THAKUR PRIYANKA THAKKARSINH', '', 'example2304070100164@demo.com'),
 (163, '2304070100165', 'THUMMAR VIVEK RAJUBHAI', '', 'example2304070100165@demo.com'),
 (164, '2304070100166', 'TIWARI NITIN VINAYKUMAR', '', 'example2304070100166@demo.com'),
@@ -269,6 +284,7 @@ CREATE TABLE `questions` (
   `semester` int(2) NOT NULL,
   `subject` varchar(100) NOT NULL,
   `subject_code` varchar(10) NOT NULL,
+  `time` int(2) NOT NULL,
   `date` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -276,12 +292,11 @@ CREATE TABLE `questions` (
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`sr_no`, `question`, `option1`, `option2`, `option3`, `option4`, `answer`, `semester`, `subject`, `subject_code`, `date`) VALUES
-(1, 'What is Jango?', 'abc', 'yashus  life', 'Yashus Wifeyy', 'Channka Chalo', 'option3', 1, 'java', '', ''),
-(2, 'What is Qmaster?', 'Nehu', 'Baby', 'ghi', 'klm', 'option1', 1, 'java', '', ''),
-(3, 'What is my name?', 'Yash', 'Nehu', 'Gopi', 'None', 'option3', 1, 'java', '', ''),
-(4, 'What is your name?', 'kko', 'Baby', 'Baba', 'Communication skills', 'option4', 1, 'java', '', ''),
-(5, 'What is Jango?', 'Yashus Lover', 'yashus  life', 'Yashus Wifeyy', 'Yashus sabkuch', 'option4', 1, 'python', '', '2024-02-27');
+INSERT INTO `questions` (`sr_no`, `question`, `option1`, `option2`, `option3`, `option4`, `answer`, `semester`, `subject`, `subject_code`, `time`, `date`) VALUES
+(15, 'What is Jango?', 'abc', 'Gopi', 'Yashu', 'Yashus sabkuch', 'option4', 1, 'python', '23MCA102', 5, '2024-03-02'),
+(16, 'What is Qmaster?', 'kko', 'Baby', 'Chuch', 'k', 'option3', 1, 'python', '23MCA102', 5, '2024-03-02'),
+(17, 'What is Java?', 'Language', 'Bahsa', 'Nothing', 'None', 'option3', 1, 'java', '23MCA101', 5, '2024-03-03'),
+(18, 'What is JS?', 'javascipr', 'abc', 'hjui', 'llj', 'option3', 1, 'java', '23MCA101', 5, '2024-03-03');
 
 -- --------------------------------------------------------
 
@@ -300,6 +315,7 @@ CREATE TABLE `result` (
   `correct` int(2) DEFAULT NULL,
   `wrong` int(2) DEFAULT NULL,
   `percentage` int(3) DEFAULT NULL,
+  `result_status` varchar(10) NOT NULL,
   `date` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -307,12 +323,21 @@ CREATE TABLE `result` (
 -- Dumping data for table `result`
 --
 
-INSERT INTO `result` (`sr_no`, `enrollment`, `student_name`, `semester`, `subject_code`, `subject`, `total_question`, `correct`, `wrong`, `percentage`, `date`) VALUES
-(19, '2304070100157', 'SOLANKI YASH RAJESHBHAI', 1, '23MCA101', 'java', 4, 0, 4, 0, '2024-02-28');
+INSERT INTO `result` (`sr_no`, `enrollment`, `student_name`, `semester`, `subject_code`, `subject`, `total_question`, `correct`, `wrong`, `percentage`, `result_status`, `date`) VALUES
+(35, '2304070100157', 'SOLANKI YASH RAJESHBHAI', 1, '23MCA101', 'java', 2, 0, 2, 0, 'fail', '2024-03-03'),
+(34, '2304070100157', 'SOLANKI YASH RAJESHBHAI', 1, '23MCA102', 'python', 2, 0, 2, 0, 'fail', '2024-03-02');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `certificate`
+--
+ALTER TABLE `certificate`
+  ADD PRIMARY KEY (`enrollment`,`subject_code`),
+  ADD UNIQUE KEY `sr_no` (`sr_no`),
+  ADD KEY `enrollment_number` (`enrollment_number`);
 
 --
 -- Indexes for table `enrollment`
@@ -346,6 +371,12 @@ ALTER TABLE `result`
 --
 
 --
+-- AUTO_INCREMENT for table `certificate`
+--
+ALTER TABLE `certificate`
+  MODIFY `sr_no` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT for table `enrollment`
 --
 ALTER TABLE `enrollment`
@@ -355,19 +386,29 @@ ALTER TABLE `enrollment`
 -- AUTO_INCREMENT for table `generated_password`
 --
 ALTER TABLE `generated_password`
-  MODIFY `sr_no` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `sr_no` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `sr_no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `result`
 --
 ALTER TABLE `result`
-  MODIFY `sr_no` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `sr_no` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `certificate`
+--
+ALTER TABLE `certificate`
+  ADD CONSTRAINT `certificate_ibfk_1` FOREIGN KEY (`enrollment_number`) REFERENCES `enrollment` (`enrollment`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

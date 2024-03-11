@@ -46,7 +46,7 @@ $num = mysqli_num_rows($execute);
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel"><?php echo $student_name; ?></h1>
 
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    
                 </div>
 
                 <div class="modal-body">

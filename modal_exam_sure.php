@@ -4,7 +4,10 @@ $subject = $_POST['subject'];
 $sem = $_POST['sem'];
 $student_name = $_POST['student_name'];
 $enrollment = $_POST['enrollment'];
-// echo $sem;
+
+date_default_timezone_set('Asia/Kolkata');
+
+
 
 
 if ($subject == "0") {
@@ -17,21 +20,34 @@ if ($subject == "0") {
 if ($subject == 'java') {
     $subject_fullname = "Core Java";
     $subject_code = "23MCA101";
+    
+    
+    
 } elseif ($subject == 'python') {
     $subject_fullname = "Python Programming";
     $subject_code = "23MCA102";
+
 } elseif ($subject == 'dbms') {
     $subject_fullname = "Database Management System";
     $subject_code = "23MCA103";
+
 } elseif ($subject == 'dms') {
     $subject_fullname = "Descrete Mathematics Structure";
     $subject_code = "23MCA104";
+
 } elseif ($subject == 'cs') {
     $subject_fullname = "Communication Skills";
     $subject_code = "23MCA105";
+
 }
 
+$s = "SELECT *FROM questions WHERE semester = $sem AND subject = '$subject' LIMIT 1";
+$r = $conn->query($s);
+$row = mysqli_fetch_assoc($r);
 
+$exam_id = $row['exam_id'];
+
+echo $exam_id;
 
 $sql = "SELECT *FROM questions WHERE semester = $sem AND subject = '$subject'";
 $result = $conn->query($sql);
@@ -90,6 +106,8 @@ if (!($num > 0)) {
                 <input type="hidden" name="subject" value="<?php echo $subject; ?>">
                 <input type="hidden" name="student_name" value="<?php echo $student_name; ?>">
                 <input type="hidden" name="enrollment" value="<?php echo $enrollment; ?>">
+                <input type="hidden" name="date" value="<?php echo $date; ?>">
+                <input type="hidden" name="exam_id" value="<?php echo $exam_id; ?>">
 
                 </form>
 
@@ -132,7 +150,7 @@ if (!($num > 0)) {
 
 
     function countdown1() {
-        var second1 = 10.1; // Change this to the desired number of seconds
+        var second1 = 11; // Change this to the desired number of seconds
 
         // Update countdown element every second
         var countdownInterval1 = setInterval(function() {
@@ -143,9 +161,6 @@ if (!($num > 0)) {
                 clearInterval(countdownInterval1); // Stop the countdown
                 document.getElementById('back_to_home').submit();
                 window.close();
-
-
-
             }
         }, 1000); // 1000 milliseconds = 1 second
     }

@@ -16,8 +16,14 @@ if ($subject == 'java') {
 }
 
 
+$insert_into_history = "INSERT INTO questions_history SELECT *FROM questions";
+$conn->query($insert_into_history);
+
+
 $delete_query = "DELETE FROM questions WHERE semester = $sem AND subject = '$subject'";
 $conn->query($delete_query);
+
+
 
 echo "<script>
         alert('Semester $sem - $subject_fullname : All Questions Deleted!');

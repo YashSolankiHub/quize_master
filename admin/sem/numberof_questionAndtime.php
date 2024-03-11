@@ -49,7 +49,10 @@ if ($subject == "0") {
                             <a class="nav-link active " aria-current="page" href="../all_sem_select_subject.php" style="color: white;">Add Questions</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active " aria-current="page" href="../show_question_all_sem.php" style="color: white;">Show Questions</a>
+                            <a class="nav-link active " aria-current="page" href="../show_question_all_sem.php" style="color: white;">Show Current Questions</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active " aria-current="page" href="show_past_questions.php" style="color: white;">Show Past questions</a>
                         </li>
 
                     </ul>
@@ -82,6 +85,9 @@ if ($subject == "0") {
                         elseif($subject == 'dbms'){echo " Database Management System";}
                         elseif($subject == 'dms'){echo " Descrete Mathematics Structure";}
                         elseif($subject == 'cs'){echo " Communication Skills";}?>" disabled>
+                        
+                        <br>
+                        <input type="text" name="title" class="form-control" id="" placeholder="Give question title"  required>
                         <br>
                         <input type="number" name="noq" class="form-control" id="" placeholder="Number Of Questions"  required>
                         <br>

@@ -15,7 +15,7 @@ for ($i = 0; $i < $length; $i++) {
 }
 // echo $password;
 $md_pass = md5($password);
-$sql1 = "update enrollment set password = '$md_pass' where enrollment= '$enrollment'";
+$sql1 = "UPDATE enrollment SET password = '$md_pass' WHERE enrollment= '$enrollment'";
 $result1 = mysqli_query($conn, $sql1);
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -26,7 +26,7 @@ require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 
 if (isset($_POST["resend"])) {
-    
+   
    
 }
 

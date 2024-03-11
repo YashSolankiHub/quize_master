@@ -39,8 +39,12 @@
                             <a class="nav-link active " aria-current="page" href="all_sem_select_subject.php" style="color: white;">Add Questions</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active " aria-current="page" href="show_question_all_sem.php" style="color: white;">Show Questions</a>
+                            <a class="nav-link active " aria-current="page" href="show_question_all_sem.php" style="color: white;">Show Current Questions</a>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active " aria-current="page" href="sem/show_past_questions.php" style="color: white;">Show Past questions</a>
+                        </li>
+                        
 
                     </ul>
                     <form class="d-flex" role="search">

@@ -87,6 +87,7 @@ $num = mysqli_num_rows($execute);
         .ctr {
             text-align: center;
         }
+        
     </style>
 </head>
 
@@ -123,7 +124,7 @@ $num = mysqli_num_rows($execute);
             </div>
         </nav>
     </header>
-    <div class="semester">
+    <div class="semester" >
 
 
         <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -137,7 +138,7 @@ $num = mysqli_num_rows($execute);
                             <form action="modal_exam_sure.php" method="post">
                                 <select id="subjectSelect" class="form-select" name="subject" onchange="this.form.submit()">
                                     <option value="0">--select--</option>
-                                    <option value="java">Core Java </option>
+                                    <option value="java">Core Java</option>
                                     <option value="python">Python Programming</option>
                                     <option value="dbms">Database Management System</option>
                                     <option value="dms">Descrete Mathematics Structure</option>
@@ -221,13 +222,6 @@ $num = mysqli_num_rows($execute);
             <div class="modal-content" style="width: 120%;">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel"><?php echo $student_name; ?></h1>
-                    <!-- Button trigger modal -->
-                    
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#static" style="margin-left: 8em;">
-                       Change Password
-                    </a>
-                    
-
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -302,36 +296,9 @@ $num = mysqli_num_rows($execute);
             </div>
         </div>
     </div>
-
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="static" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Change Password</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="change_password_validation.php" method="post">
-                        <label for="cp" class="form-label">Current Password:</label>
-                        <input type="password" name="current_password" class="form-control" id="cp" required>
-                        <br>
-                        <label for="cp" class="form-label">New Password:</label>
-                        <input type="password" name="new_password" class="form-control" id="cp" required>
-                        <input type="hidden" name="enrollment" value="<?php echo $enrollment;?>">
-                    
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Change</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
+<script>
+    window.close();
+</script>
 
 </html>

@@ -10,17 +10,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subject = $_SESSION['subject'];
 }
 
+date_default_timezone_set('Asia/Kolkata');
+
 if ($subject == 'java') {
     $subject_fullname = "Core Java";
+    $subject_code = "23MCA101";
+    $d = date('Y-m-d H:i:s');
+    $id = $subject_code.$d;
 } elseif ($subject == 'python') {
     $subject_fullname = "Python Programming";
+    $subject_code = "23MCA102";
+    $d = date('Y-m-d H:i:s');
+    $id = $subject_code.$d;
 } elseif ($subject == 'dbms') {
-    $subject_fullname ="Database Management System";
+    $subject_fullname = "Database Management System";
+    $subject_code = "23MCA103";
+    $d = date('Y-m-d H:i:s');
+    $id = $subject_code.$d;
 } elseif ($subject == 'dms') {
     $subject_fullname = "Descrete Mathematics Structure";
+    $subject_code = "23MCA104";
+    $d = date('Y-m-d H:i:s');
+    $id = $subject_code.$d;
 } elseif ($subject == 'cs') {
     $subject_fullname = "Communication Skills";
+    $subject_code = "23MCA105";
+    $d = date('Y-m-d H:i:s');
+    $id = $subject_code.$d;
 }
+
+
+$s = "SELECT question_title FROM questions WHERE semester = '$sem' AND subject = '$subject' LIMIT 1";
+$r = $conn->query($s);
+$ro = mysqli_fetch_assoc($r);
+
+$title = $ro['question_title'];
 
 
 
@@ -79,7 +103,10 @@ if ($num == 0) {
                             <a class="nav-link active " aria-current="page" href="../all_sem_select_subject.php" style="color: white;">Add Questions</a>
                         </li>
                         <li class="nav-item " style="border:1px solid white;border-radius:15px">
-                            <a class="nav-link active " aria-current="page" href="../show_question_all_sem.php" style="color: white;">Show Questions</a>
+                            <a class="nav-link active " aria-current="page" href="../show_question_all_sem.php" style="color: white;">Show Current Questions</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active " aria-current="page" href="show_past_questions.php" style="color: white;">Show past questions</a>
                         </li>
 
                     </ul>
@@ -108,7 +135,7 @@ if ($num == 0) {
                         <div class="d-flex">
                             <h3 class="card-title center_all_semester_head">Semester <?php echo $sem; ?></h3>
                             <h3>: <?php echo $subject_fullname;
-                                    ?></h3>
+                                    ?></h3> &nbsp;&nbsp;&nbsp;<h3><?php  echo $title;?></h3>
 
                         </div>
 

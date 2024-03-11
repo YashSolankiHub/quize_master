@@ -3,6 +3,9 @@ $number_of_question = $_POST['noq'];
 $time = $_POST['time'];
 $sem = $_POST['sem'];
 $subject = $_POST['subject'];
+$title = $_POST['title'];
+
+
 
 // echo $number_of_question;
 // echo "<br>";
@@ -57,7 +60,10 @@ $subject = $_POST['subject'];
                             <a class="nav-link active " aria-current="page" href="../all_sem_select_subject.php" style="color: white;">Add Questions</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link active " aria-current="page" href="../show_question_all_sem.php" style="color: white;">Show Questions</a>
+                            <a class="nav-link active " aria-current="page" href="../show_question_all_sem.php" style="color: white;">Show Current Questions</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active " aria-current="page" href="show_past_questions.php" style="color: white;">Show Past questions</a>
                         </li>
 
                     </ul>
@@ -143,6 +149,8 @@ $subject = $_POST['subject'];
                             <input type="hidden" name="noq" value="<?php echo $number_of_question; ?>">
                             <input type="hidden" name="sem" value="<?php echo $sem ?>">
                             <input type="hidden" name="time" value="<?php echo $time ?>">
+                            <input type="hidden" name="exam_id" value="<?php echo $exam_id ?>">
+                            <input type="hidden" name="title" value="<?php echo $title ?>">
                         </form>
                     </div>
                 </div>

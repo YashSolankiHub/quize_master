@@ -1,4 +1,43 @@
 <?php
+include "db_connection.php";
+$current_password = $_POST['current_password'];
+$new_password = $_POST['new_password'];
+$enrollment = $_POST['enrollment'];
+
+// echo $current_password;
+// echo "<br>";
+// echo $new_password;
+// echo "<br>";
+// echo $enrollment;
+
+$select = "SELECT password FROM enrollment WHERE enrollment = '$enrollment'";
+$result = $conn->query($select);
+$row = mysqli_fetch_assoc($result);
+
+$stored_password = $row['password'];
+$isNotMatch = false;
+$isSize = false;
+
+if (md5($current_password) != $stored_password) {
+    $isNotMatch = true;
+} elseif (strlen($new_password) < 6) {
+    $isSize = true;
+} elseif (strlen($new_password) > 6) {
+    $inc_password = md5($new_password);
+    $update = "UPDATE enrollment SET password = '$inc_password' WHERE enrollment = '$enrollment'";
+    $conn->query($update);
+    echo "<script>
+                alert('Password changed successfully!');
+                window.location.href = 'home_page.php';
+                </script>";
+}
+
+
+?>
+
+
+
+<?php
 session_start();
 
 // $enrollment = $_SESSION['enrollment'];
@@ -222,11 +261,11 @@ $num = mysqli_num_rows($execute);
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel"><?php echo $student_name; ?></h1>
                     <!-- Button trigger modal -->
-                    
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#static" style="margin-left: 8em;">
+
+                    <!-- <a href="#" data-bs-toggle="modal" data-bs-target="#static" style="margin-left: 8em;">
                        Change Password
-                    </a>
-                    
+                    </a> -->
+
 
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -306,32 +345,46 @@ $num = mysqli_num_rows($execute);
 
 
     <!-- Modal -->
-    <div class="modal fade" id="static" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="static" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel">Change Password</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
                 </div>
                 <div class="modal-body">
                     <form action="change_password_validation.php" method="post">
-                        <label for="cp" class="form-label">Current Password:</label>
-                        <input type="password" name="current_password" class="form-control" id="cp" required>
+                        <label for="cp" class="form-label">Current Password:</label> <?php
+                                                                                        if ($isNotMatch) { ?>
+                            <span style="color: red;">*Incorrect Password!</span>
+                        <?php } ?>
+
+                        <input type="password" name="current_password" class="form-control" id="cp">
                         <br>
                         <label for="cp" class="form-label">New Password:</label>
-                        <input type="password" name="new_password" class="form-control" id="cp" required>
-                        <input type="hidden" name="enrollment" value="<?php echo $enrollment;?>">
-                    
-                    
+                        <?php
+                        if ($isSize) { ?>
+                            <span style="color: red;">*Password should be atleast 6 charactes!</span>
+
+                        <?php } ?>
+
+                        <input type="password" name="new_password" class="form-control" id="cp">
+                        <input type="hidden" name="enrollment" value="<?php echo $enrollment; ?>">
+
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="home_page.php" class="btn btn-secondary">Close</a>
                     <button type="submit" class="btn btn-primary">Change</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        var myModal = new bootstrap.Modal(document.getElementById('static'), {})
+        myModal.show()
+    </script>
 </body>
 
 </html>

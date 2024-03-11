@@ -33,6 +33,16 @@ $select = "SELECT *FROM questions WHERE semester = $sem AND subject = '$subject'
 $result = $conn->query($select);
 $result1 = $conn->query($select);
 
+//take exam_id
+
+$s = "SELECT exam_id FROM questions WHERE semester = $sem AND subject = '$subject' LIMIT 1";
+$r = $conn->query($s);
+$line = mysqli_fetch_assoc($r);
+
+$exam_id = $line['exam_id'];
+// echo $exam_id;
+
+
 $num = mysqli_num_rows($result);
 $total_question = $num;
 $qn = 1;
@@ -63,8 +73,8 @@ if ($percentage >= 50) {
 
 // echo $round_per;
 
-$insert = "INSERT INTO result(enrollment, student_name, semester, subject_code, subject, total_question, correct, wrong, percentage, result_status, date) 
-VALUES ('$enrollment','$student_name', $sem, '$subject_code', '$subject', $total_question, $correct, $wrong, $percentage, '$status', NOW())";
+$insert = "INSERT INTO result(exam_id, enrollment, student_name, semester, subject_code, subject, total_question, correct, wrong, percentage, result_status, date) 
+VALUES ('$exam_id', '$enrollment','$student_name', $sem, '$subject_code', '$subject', $total_question, $correct, $wrong, $percentage, '$status', NOW())";
 $conn->query($insert);
 
 

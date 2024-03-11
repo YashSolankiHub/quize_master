@@ -24,10 +24,8 @@
                     <h3 class="modal-title" id="exampleModalLabel" style="text-align: center;color:red;">Warning!</h3>
                 </div>
                 <div class="modal-body">
-                   <p >Quiz Master informs you that you cannot close/change tab or minimize the browser in such ongoing exam.</p>
-                   <p >Your exam has been canceled.</p>
-                   <p >Don't do anything like this next time.</p>
-
+                   <p>Your exam has been closed because you did not submit it within the given time.</p>
+                   <p>Better luck next time</p>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
                         <a class="btn btn-secondary" href="home_page1.php">Home page</a>
