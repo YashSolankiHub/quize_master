@@ -64,9 +64,6 @@ if ($percentage >= 80) {
     alert('Congratulations...Your certificate of $subject_fullname generated You can download it from your profile');
     window.location.href = 'home_page.php';
     </script>";
-    
-
-
 
 
 }

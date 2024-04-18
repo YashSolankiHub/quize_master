@@ -1,3 +1,37 @@
+<?php
+session_start();
+function customErrorHandler($errno, $errstr, $errfile, $errline)
+{
+    // Check if the error level is among those you want to convert into exceptions
+    if (error_reporting() === 0 || !in_array($errno, [E_WARNING, E_NOTICE])) {
+        return;
+    }
+
+    // Throw an exception
+    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+}
+
+// Set custom error handler
+set_error_handler('customErrorHandler');
+
+try {
+    // Trigger a PHP warning
+    if (isset($_SESSION['otp'])) {
+        $otp = $_SESSION['otp'];
+    }else
+        {
+            $otp = $_POST['otp'];
+        }
+} catch (ErrorException $e) {
+    // Catch the exception
+    echo "<script>
+    window.location.href ='404_error.php';
+        </script>";
+}
+
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +44,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="style/home_page.css">
     <style>
+        body{
+            background-image: url("img/online-entrance-exam.png");
+        }
         .li-hover:hover{
             background-color: rgb(247, 247, 247);
             color: black;

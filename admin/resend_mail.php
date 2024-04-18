@@ -25,10 +25,7 @@ require 'phpmailer/src/Exception.php';
 require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 
-if (isset($_POST["resend"])) {
-   
-   
-}
+
 
 ?>
 

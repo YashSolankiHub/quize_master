@@ -23,6 +23,9 @@ $conn->query($insert_into_history);
 $delete_query = "DELETE FROM questions WHERE semester = $sem AND subject = '$subject'";
 $conn->query($delete_query);
 
+$delete_notification = "DELETE FROM notification WHERE subject = '$subject'";
+$conn->query($delete_notification);
+
 
 
 echo "<script>

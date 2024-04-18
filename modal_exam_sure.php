@@ -47,13 +47,13 @@ $row = mysqli_fetch_assoc($r);
 
 $exam_id = $row['exam_id'];
 
-echo $exam_id;
+// echo $exam_id;
 
 $sql = "SELECT *FROM questions WHERE semester = $sem AND subject = '$subject'";
 $result = $conn->query($sql);
 $num = mysqli_num_rows($result);
 
-$select = "SELECT *FROM result WHERE enrollment = '$enrollment' AND subject_code = '$subject_code'";
+$select = "SELECT *FROM result WHERE enrollment = '$enrollment' AND subject_code = '$subject_code' AND exam_id = '$exam_id'";
 $execute = $conn->query($select);
 $num1 = mysqli_num_rows($execute);
 

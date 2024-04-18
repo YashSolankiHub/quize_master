@@ -42,7 +42,7 @@ $num = mysqli_num_rows($execute);
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content" style="width: 120%;">
+            <div class="modal-content" style="width: 205%;position:relative;right:245px;">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="staticBackdropLabel"><?php echo $student_name; ?></h1>
 
@@ -58,8 +58,12 @@ $num = mysqli_num_rows($execute);
                             <thead>
                                 <tr>
 
-                                    <th scope="col" class="ctr">Given exam</th>
+                                <th scope="col" class="ctr">Given exam</th>
+                                    <th scope="col" class="ctr">Title</th>
                                     <th scope="col" class="ctr">Semester</th>
+                                    <th scope="col" class="ctr">Total Questions</th>
+                                    <th scope="col" class="ctr">Correct</th>    
+                                    <th scope="col" class="ctr">Wrong</th>
                                     <th scope="col" class="ctr">Percentage</th>
                                     <th scope="col" class="ctr">Result</th>
                                     <th scope="col" class="ctr">Date</th>
@@ -69,8 +73,12 @@ $num = mysqli_num_rows($execute);
                             <tbody>
                                 <?php while ($line = mysqli_fetch_assoc($execute)) { ?>
                                     <tr>
-                                        <td class="ctr"><?php echo $line['subject']; ?></td>
+                                    <td class="ctr"><?php echo $line['subject']; ?></td>
+                                        <td class="ctr"><?php echo $line['question_title']; ?></td>
                                         <td class="ctr"><?php echo $line['semester']; ?></td>
+                                        <td class="ctr"><?php echo $line['total_question']; ?></td>
+                                        <td class="ctr"><?php echo $line['correct']; ?></td>
+                                        <td class="ctr"><?php echo $line['wrong']; ?></td>
                                         <td class="ctr"><?php echo $line['percentage'] . "%"; ?></td>
                                         <td class="ctr"><?php echo $line['result_status']; ?></td>
                                         <td class="ctr"><?php echo $line['date']; ?></td>

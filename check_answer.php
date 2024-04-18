@@ -7,6 +7,7 @@ $subject = $_POST['subject'];
 $student_name = $_POST['student_name'];
 $enrollment = $_POST['enrollment'];
 $number_of_question = $_POST['noq'];
+$exam_id= $_POST['exam_id'];
 
 
 if ($subject == 'java') {
@@ -42,6 +43,11 @@ $line = mysqli_fetch_assoc($r);
 $exam_id = $line['exam_id'];
 // echo $exam_id;
 
+$s1 = "SELECT question_title FROM questions WHERE semester = $sem AND subject = '$subject' LIMIT 1";
+$r1 = $conn->query($s1);
+$line1 = mysqli_fetch_assoc($r1);
+$title = $line1['question_title'];
+
 
 $num = mysqli_num_rows($result);
 $total_question = $num;
@@ -73,9 +79,12 @@ if ($percentage >= 50) {
 
 // echo $round_per;
 
-$insert = "INSERT INTO result(exam_id, enrollment, student_name, semester, subject_code, subject, total_question, correct, wrong, percentage, result_status, date) 
-VALUES ('$exam_id', '$enrollment','$student_name', $sem, '$subject_code', '$subject', $total_question, $correct, $wrong, $percentage, '$status', NOW())";
+$insert = "INSERT INTO result(exam_id,question_title,  enrollment, student_name, semester, subject_code, subject, total_question, correct, wrong, percentage, result_status, date) 
+VALUES ('$exam_id','$title','$enrollment','$student_name', $sem, '$subject_code', '$subject', $total_question, $correct, $wrong, $percentage, '$status', NOW())";
 $conn->query($insert);
+
+$update_status = "UPDATE exam_status_sem$sem SET $subject = 1 WHERE enrollment = '$enrollment'";
+$conn->query($update_status);
 
 
 if ($percentage >= 80) {
@@ -106,8 +115,10 @@ if ($percentage >= 80) {
 
     imagedestroy($image);
 
-    $sql = "INSERT INTO certificate (enrollment, subject_code, url, enrollment_number) VALUE ('$enrollment', '$subject_code','$url', '$enrollment')";
+    $sql = "INSERT INTO certificate (enrollment, subject_code,exam_id, url, enrollment_number) VALUE ('$enrollment', '$subject_code','$exam_id', '$url', '$enrollment')";
     $result = $conn->query($sql);
+
+  
 
 
 }

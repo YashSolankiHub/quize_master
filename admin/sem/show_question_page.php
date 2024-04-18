@@ -135,10 +135,10 @@ if ($num == 0) {
                         <div class="d-flex">
                             <h3 class="card-title center_all_semester_head">Semester <?php echo $sem; ?></h3>
                             <h3>: <?php echo $subject_fullname;
-                                    ?></h3> &nbsp;&nbsp;&nbsp;<h3><?php  echo $title;?></h3>
+                                    ?>
 
                         </div>
-
+                        </h5> &nbsp;&nbsp;&nbsp;<h3> <?php echo $title; ?></h5>
                         <form action="delete_question.php" method="post" id="dq">
                             <input type="hidden" name="subject" value="<?php echo $subject; ?>">
                             <input type="hidden" name="sem" value="<?php echo $sem; ?>">

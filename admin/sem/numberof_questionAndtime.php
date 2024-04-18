@@ -1,7 +1,32 @@
 <?php
+
+include "../db_connection.php";
+
 $subject = $_POST['subject'];
 $sem = $_POST['sem'];
 // echo $sem;
+
+if ($subject == 'java') {
+    $subject_fullname = "Core Java";
+    $subject_code = "23MCA101";
+} elseif ($subject == 'python') {
+    $subject_fullname = "Python Programming";
+    $subject_code = "23MCA102";
+
+} elseif ($subject == 'dbms') {
+    $subject_fullname = "Database Management System";
+    $subject_code = "23MCA103";
+
+} elseif ($subject == 'dms') {
+    $subject_fullname = "Descrete Mathematics Structure";
+    $subject_code = "23MCA104";
+
+} elseif ($subject == 'cs') {
+    $subject_fullname = "Communication Skills";
+    $subject_code = "23MCA105";
+
+}
+
 
 
 if ($subject == "0") {
@@ -9,6 +34,23 @@ if ($subject == "0") {
         window.location.href='../all_sem_select_subject.php';
         </script>";
 }
+
+$select = "SELECT *FROM questions WHERE subject_code = '$subject_code'";
+$result = $conn->query($select);
+$num = $result->num_rows;
+
+if($num > 0)
+    {
+        echo "
+        <script>
+            alert('Please delete current available qustions!')
+        </script>";
+        echo "<script>
+        window.location.href='../all_sem_select_subject.php';
+        </script>";
+    }
+
+
     
 
 ?>

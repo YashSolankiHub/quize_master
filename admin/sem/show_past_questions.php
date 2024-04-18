@@ -44,7 +44,7 @@ if ($num == 0) {
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         
                         <li class="nav-item ">
-                            <a class="nav-link active " aria-current="page" href="home_page.php" style="color: white;">Home</a>
+                            <a class="nav-link active " aria-current="page" href="../home_page.php" style="color: white;">Home</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link active " aria-current="page" href="../show_students.php" style="color: white;">Students</a>
@@ -97,6 +97,7 @@ if ($num == 0) {
   </thead>
   <tbody>
     <?php 
+
     while($row = mysqli_fetch_assoc($result)) { ?>
         <tr>
             <td> <?php echo $row['exam_id']; ?> </td>

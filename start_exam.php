@@ -151,6 +151,7 @@ $time
                                     <input type="hidden" name="noq" value="<?php echo $num; ?>">
                                     <input type="hidden" name="sem" value="<?php echo $sem; ?>">
                                     <input type="hidden" name="subject" value="<?php echo $subject; ?>">
+                                    <input type="hidden" name="exam_id" value="<?php echo $exam_id; ?>">
 
 
                                     <button type="submit" onclick="back_to_home()" class="btn btn-success" style="margin-right: 3em;width:30%">Submit</button>
