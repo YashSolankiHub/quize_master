@@ -19,7 +19,7 @@ $sql  = "UPDATE admin_login set otp = '$password'";
 $conn->query($sql);
 
 
-
+    
 
 
 

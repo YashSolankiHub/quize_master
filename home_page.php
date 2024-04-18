@@ -294,6 +294,9 @@ $result_check_status = $conn->query($check_status);
                         <li class="nav-item ">
                             <a class="nav-link active " aria-current="page" href="about.php" style="color: white;">About</a>
                         </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active " aria-current="page" href="score.php" style="color: white;">Scoreboard</a>
+                        </li>
 
                     </ul>
                     <form class="d-flex" role="search">
